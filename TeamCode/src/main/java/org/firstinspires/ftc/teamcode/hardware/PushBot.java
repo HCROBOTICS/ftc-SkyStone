@@ -9,10 +9,10 @@ public class PushBot {
 
     public PushBot(HardwareMap hw) {
         this.hw = hw;
+        wheels = new Wheels(hw);
     }
 
     public void init() {
-        wheels = new Wheels(hw.dcMotor.get("rf"), hw.dcMotor.get("lf"), hw.dcMotor.get("rb"), hw.dcMotor.get("lb"));
         wheels.init();
         wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }

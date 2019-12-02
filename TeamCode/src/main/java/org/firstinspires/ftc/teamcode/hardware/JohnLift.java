@@ -15,6 +15,6 @@ public class JohnLift {
     }
 
     public void move(double power) {
-        motor.setPower(power);
+        motor.setPower(0.75 * power);
     }
 }
