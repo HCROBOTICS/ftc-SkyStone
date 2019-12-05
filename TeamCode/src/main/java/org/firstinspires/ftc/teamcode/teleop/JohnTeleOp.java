@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 public class JohnTeleOp extends OpMode {
     JohnRobot robot;
 
-    public static int wrist_speed = .005;
+    public static double WRIST_SPEED = .005;
 
     @Override
     public void init() {
@@ -47,8 +47,8 @@ public class JohnTeleOp extends OpMode {
             robot.grab.setPosition(1);
 
         if (gamepad1.x)
-            robot.wrist.setPosition(robot.wrist.getPosition() - wrist_speed);
+            robot.wrist.setPosition(robot.wrist.getPosition() - WRIST_SPEED);
         else if (gamepad1.y)
-            robot.wrist.setPosition(robot.wrist.getPosition() + wrist_speed);
+            robot.wrist.setPosition(robot.wrist.getPosition() + WRIST_SPEED);
     }
 }
