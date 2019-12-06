@@ -29,7 +29,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 @Autonomous(name = "Vuforia Navigation", group = "Experimental")
 public class Auto extends LinearOpMode {
     private PushBot robot;
-    private Vuforia vuforia;
+    protected Vuforia vuforia;
 
     @Override public void runOpMode() {
         robot = new PushBot(hardwareMap);
