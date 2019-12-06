@@ -46,9 +46,9 @@ public class JohnTeleOp extends OpMode {
         robot.lift.move(-gamepad2.left_stick_y);
         robot.rotate.setPower(-gamepad2.right_stick_y);
 
-        if (gamepad2.left_trigger == 1)
+        if (gamepad2.left_bumper)
             robot.grab.setPosition(0.5);
-        else if (gamepad2.right_trigger == 1)
+        else if (gamepad2.right_bumper)
             robot.grab.setPosition(1);
 
         robot.wrist.setPosition(robot.wrist.getPosition() - WRIST_SPEED * (gamepad2.left_trigger - gamepad2.right_trigger));
