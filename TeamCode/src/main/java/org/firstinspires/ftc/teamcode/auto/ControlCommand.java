@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class ControlCommand extends Gamepad {
     enum Command {
-        FORWARD, BACKWARD
+        FORWARD, BACKWARD,
+        STOP
     }
 
     public ControlCommand(Command cmd) {
@@ -14,6 +15,8 @@ public class ControlCommand extends Gamepad {
                 break;
             case BACKWARD:
                 left_stick_y = 1;
+            default:
+                break;
         }
     }
 }
