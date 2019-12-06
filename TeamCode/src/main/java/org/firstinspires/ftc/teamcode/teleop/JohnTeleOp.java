@@ -23,6 +23,11 @@ public class JohnTeleOp extends OpMode {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
+        robot.wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         telemetry.addData("Robot", "Ready");
         telemetry.update();
     }
@@ -38,17 +43,14 @@ public class JohnTeleOp extends OpMode {
     @Override
     public void loop() {
         robot.wheels.goJoystick(gamepad1);
-        robot.lift.move(gamepad1.right_trigger - gamepad1.left_trigger);
-        robot.rotate.setPower((gamepad1.left_bumper? 1:0) - (gamepad1.right_bumper? 1:0));
+        robot.lift.move(-gamepad2.left_stick_y);
+        robot.rotate.setPower(-gamepad2.right_stick_y);
 
-        if (gamepad1.a)
+        if (gamepad2.left_trigger == 1)
             robot.grab.setPosition(0.5);
-        else if (gamepad1.b)
+        else if (gamepad2.right_trigger == 1)
             robot.grab.setPosition(1);
 
-        if (gamepad1.x)
-            robot.wrist.setPosition(robot.wrist.getPosition() - WRIST_SPEED);
-        else if (gamepad1.y)
-            robot.wrist.setPosition(robot.wrist.getPosition() + WRIST_SPEED);
+        robot.wrist.setPosition(robot.wrist.getPosition() - WRIST_SPEED * (gamepad2.left_trigger - gamepad2.right_trigger));
     }
 }

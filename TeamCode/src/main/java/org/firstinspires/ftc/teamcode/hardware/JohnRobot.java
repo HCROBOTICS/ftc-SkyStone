@@ -32,6 +32,11 @@ public class JohnRobot extends PushBot {
         wheels.lb.setDirection(DcMotorSimple.Direction.FORWARD);
         wheels.rb.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        wheels.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        wheels.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         lift.init();
         rotate.setPower(0);
         rotate.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
