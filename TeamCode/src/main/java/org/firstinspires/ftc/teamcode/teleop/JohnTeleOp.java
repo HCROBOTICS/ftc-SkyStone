@@ -23,10 +23,10 @@ public class JohnTeleOp extends OpMode {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
-        robot.wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.wheels.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.wheels.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        robot.wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.wheels.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         telemetry.addData("Robot", "Ready");
         telemetry.update();
@@ -43,8 +43,10 @@ public class JohnTeleOp extends OpMode {
     @Override
     public void loop() {
         robot.wheels.goJoystick(gamepad1);
-        robot.lift.move(-gamepad2.left_stick_y);
-        robot.rotate.setPower(gamepad2.right_stick_y);
+        robot.lift.move(gamepad2.left_stick_y);
+        robot.rotate.setPower(-gamepad2.right_stick_y);
+
+        telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
 
         if (gamepad2.left_bumper)
             robot.grab.setPosition(0.5);

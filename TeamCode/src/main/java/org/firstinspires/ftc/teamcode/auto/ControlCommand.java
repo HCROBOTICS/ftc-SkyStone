@@ -15,7 +15,7 @@ public class ControlCommand extends Gamepad {
                 break;
             case BACKWARD:
                 left_stick_y = 1;
-            default:
+            case STOP:
                 break;
         }
     }
