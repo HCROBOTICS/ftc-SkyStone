@@ -5,15 +5,19 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class CameronRobot extends PushBot {
-    CameronArm arm;
+    public CameronArm arm;
 
     public CameronRobot(HardwareMap hw) {
         super(hw);
+
+        arm = new CameronArm(hw);
     }
 
     @Override
     public void init() {
         super.init();
+
+        arm.init();
 
         wheels.lf.setDirection(DcMotorSimple.Direction.REVERSE);
         wheels.rf.setDirection(DcMotorSimple.Direction.FORWARD);

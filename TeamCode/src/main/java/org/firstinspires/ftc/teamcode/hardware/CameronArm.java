@@ -28,7 +28,12 @@ public class CameronArm {
     }
 
     public void go(Gamepad gamepad) {
+        double power = 0;
+        if (gamepad.dpad_up) power = -1;
+        else if (gamepad.dpad_down) power = 1;
 
+        rightPivot.setPower(power);
+        leftPivot.setPower(power);
     }
 
     public void stop() {

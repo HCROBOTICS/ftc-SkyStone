@@ -22,5 +22,6 @@ public class CameronTeleOp extends OpMode {
     @Override
     public void loop() {
         robot.wheels.goJoystick(gamepad1);
+        robot.arm.go(gamepad2);
     }
 }
