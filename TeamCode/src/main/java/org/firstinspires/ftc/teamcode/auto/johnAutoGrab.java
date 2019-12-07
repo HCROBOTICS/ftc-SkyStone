@@ -7,6 +7,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveBy
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.teamcode.auto.Auto;
 import org.firstinspires.ftc.teamcode.hardware.JohnLift;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
@@ -18,18 +19,18 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.mmPerInch;
 import static org.firstinspires.ftc.teamcode.auto.ControlCommand.*;
 
-@Autonomous (name = "John Auto")
-public class JohnAuto extends Auto {
-    private PushBot robot;
+@Autonomous (name = "John Auto2")
+public class johnAutoGrab extends Auto {
+    private JohnRobot robot;
 
     enum Task {
         START, MOVING, STOP, DONE
     }
 
-    Task task = Task.START;
+    org.firstinspires.ftc.teamcode.auto.JohnAuto.Task task = org.firstinspires.ftc.teamcode.auto.JohnAuto.Task.START;
 
     @Override public void runOpMode() {
-        robot = new PushBot(hardwareMap);
+        robot = new JohnRobot(hardwareMap);
         robot.init();
 
         // Compensate for the fact that the motors all face a different direction.
@@ -62,7 +63,9 @@ public class JohnAuto extends Auto {
             }
 
              */
-
+            robot.rotate.setPower(.5);
+            sleep(500);
+            robot.rotate.setPower(0);
 
             forward(3000);
             break;
