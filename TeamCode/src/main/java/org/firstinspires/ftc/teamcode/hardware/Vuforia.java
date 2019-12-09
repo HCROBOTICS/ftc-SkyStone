@@ -53,6 +53,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
 /* Okay, I know it's not a hardware device, but I couldn't justify classifying it elsewhere. */
+// put it in auto?
 public class Vuforia {
     HardwareMap hw;
     public Vuforia(HardwareMap hw) {
