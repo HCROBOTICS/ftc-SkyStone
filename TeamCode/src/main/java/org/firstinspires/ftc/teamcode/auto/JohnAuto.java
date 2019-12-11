@@ -3,20 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByEncoder_Linear;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.teamcode.hardware.JohnLift;
-import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
-import org.firstinspires.ftc.teamcode.hardware.Vuforia;
-
-import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
-import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
-import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
-import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.mmPerInch;
-import static org.firstinspires.ftc.teamcode.auto.ControlCommand.*;
 
 @Autonomous (name = "John Auto")
 public class JohnAuto extends Auto {
@@ -48,7 +35,7 @@ public class JohnAuto extends Auto {
             switch (task) {
                 case START:
                     robot.wheels.encoderReset();
-                    robot.wheels.goJoystick(new ControlCommand(Command.FORWARD));
+                    robot.wheels.goJoystick(new ControllerCommand(Command.FORWARD));
                     task = Task.MOVING;
                     break;
                 case MOVING:

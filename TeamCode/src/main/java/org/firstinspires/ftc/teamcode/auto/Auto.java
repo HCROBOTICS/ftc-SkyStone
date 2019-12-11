@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
@@ -26,14 +27,15 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.mmPerInch;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
-@Autonomous(name = "Vuforia Navigation", group = "Experimental")
+@Autonomous(name = "Proto-Autonomous", group = "Hypothetical")
+@Disabled
 public class Auto extends LinearOpMode {
     private PushBot robot;
     protected Vuforia vuforia;
 
     @Override public void runOpMode() {
         robot = new PushBot(hardwareMap);
-        //robot.init();
+        robot.init();
 
         vuforia = new Vuforia(hardwareMap);
         vuforia.init();
