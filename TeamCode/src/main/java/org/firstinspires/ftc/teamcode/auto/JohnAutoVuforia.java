@@ -51,12 +51,31 @@ public class JohnAutoVuforia extends Auto {
                 telemetry.addData("Visible Target", "none");
             }
 
-            // Use the last seen location as a reference for the robot's current location. When a
-            // new VuMark is seen, update our current location.
+            /*
+             Use the last seen location as a reference for the robot's current location. When a new
+             VuMark is seen, update our current location. Store <r,theta> in a 2D array (magnitude,
+             direction).
+
+             while (current_angle < desired_angle) {
+                turn;
+             }
+             while (current_angle > desired_angle) {
+                turn;
+             }
+             while (how_far_its_moved < how_far_it_should_move) {
+                move;
+             }
+
+             */
+
+
+
 
 
 
         } //end: while OpMode is active
+
+
     }
 
 
