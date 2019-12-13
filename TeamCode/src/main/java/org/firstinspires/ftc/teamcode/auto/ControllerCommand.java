@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-public class ControlCommand extends Gamepad {
+public class ControllerCommand extends Gamepad {
     enum Command {
         FORWARD, BACKWARD,
         STOP
     }
 
-    public ControlCommand(Command cmd) {
+    public ControllerCommand(Command cmd) {
         switch (cmd) {
             case FORWARD:
                 left_stick_y = -1;
