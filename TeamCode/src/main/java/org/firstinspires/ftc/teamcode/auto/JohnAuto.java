@@ -19,6 +19,7 @@ public class JohnAuto extends Auto {
         robot = new PushBot(hardwareMap);
         robot.init();
 
+
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rf.setDirection(DcMotor.Direction.FORWARD);

@@ -24,6 +24,7 @@ public class JohnAutoVuforia extends Auto {
     public int tics_per_revolution = 1680;
     public double wheel_circumference = 2 * Math.PI * (49 / mmPerInch); // circumference in INCHES
     public double tics_per_inch = tics_per_revolution / wheel_circumference;
+    // private double inches_travelled = tics_per_inch * (number of tics we've moved)
 
     @Override public void runOpMode() {
         robot = new JohnRobot(hardwareMap);
@@ -55,6 +56,14 @@ public class JohnAutoVuforia extends Auto {
              Use the last seen location as a reference for the robot's current location. When a new
              VuMark is seen, update our current location. Store <r,theta> in a 2D array (magnitude,
              direction).
+
+             current position is
+               reference position x + (how far we've moved) * cos angle
+               reference position y + (how far we've moved) * sin angle
+
+             if (we see another picture) {
+               update reference position
+              }
 
              while (current_angle < desired_angle) {
                 turn;
