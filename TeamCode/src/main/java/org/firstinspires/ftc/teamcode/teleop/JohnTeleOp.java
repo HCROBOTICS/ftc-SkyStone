@@ -10,8 +10,6 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 public class JohnTeleOp extends OpMode {
     JohnRobot robot;
 
-    public static double WRIST_SPEED = .005;
-
     @Override
     public void init() {
         robot = new JohnRobot(hardwareMap);
@@ -43,16 +41,31 @@ public class JohnTeleOp extends OpMode {
     @Override
     public void loop() {
         robot.wheels.goJoystick(gamepad1);
-        robot.lift.move(gamepad2.left_stick_y);
-        robot.rotate.setPower(-gamepad2.right_stick_y);
 
-        telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
+        robot.lift.move(-gamepad2.left_stick_y);
 
-        if (gamepad2.left_bumper)
-            robot.grab.setPosition(0.5);
-        else if (gamepad2.right_bumper)
-            robot.grab.setPosition(1);
+        robot.rotate.setPower(-gamepad2.right_stick_y / 2);
 
-        robot.wrist.setPosition(robot.wrist.getPosition() - WRIST_SPEED * (gamepad2.left_trigger - gamepad2.right_trigger));
+        robot.wrist.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+
+        // counter-rotate rotate to compensate for angle changes if lift is the only thing moving
+        if (gamepad2.left_stick_y != 0 && gamepad2.right_stick_y == 0) {
+            robot.rotate.setPower((gamepad2.left_stick_y) / 5);
+        }
+
+        if (gamepad2.x) {
+            robot.lGrab.setPosition(0);
+            robot.rGrab.setPosition(1);
+        } else if (gamepad2.b) {
+            robot.lGrab.setPosition(1);
+            robot.rGrab.setPosition(0);
+        }
+
+        if (gamepad2.left_bumper) {
+            robot.drag.setPosition(0);
+        } else if (gamepad2.right_bumper) {
+            robot.drag.setPosition(1);
+        }
+
     }
 }

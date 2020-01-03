@@ -10,17 +10,21 @@ public class JohnRobot extends PushBot {
     public JohnLift lift;
 
     public DcMotor rotate;
-    public Servo grab;
-    public Servo wrist;
+    public DcMotor wrist;
+    public Servo lGrab;
+    public Servo rGrab;
+    public Servo drag;
+
 
     public JohnRobot(HardwareMap hw) {
         super(hw);
 
         lift = new JohnLift(hw.dcMotor.get("lift"));
         rotate = hw.dcMotor.get("rotate");
-
-        grab = hw.servo.get("grab");
-        wrist = hw.servo.get("wrist");
+        lGrab = hw.servo.get("lGrab");
+        rGrab = hw.servo.get("rGrab");
+        wrist = hw.dcMotor.get("wrist");
+        drag = hw.servo.get("drag");
     }
 
     @Override
@@ -38,6 +42,9 @@ public class JohnRobot extends PushBot {
         wheels.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         lift.init();
+
+        wrist.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         rotate.setPower(0);
         rotate.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
