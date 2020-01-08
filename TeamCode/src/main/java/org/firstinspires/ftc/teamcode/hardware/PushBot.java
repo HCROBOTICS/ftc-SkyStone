@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class PushBot {
@@ -15,6 +16,10 @@ public class PushBot {
     public void init() {
         wheels.init();
         wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void go(Gamepad gamepad1, Gamepad gamepad2) {
+        wheels.go(gamepad1);
     }
 
     public void stop() {

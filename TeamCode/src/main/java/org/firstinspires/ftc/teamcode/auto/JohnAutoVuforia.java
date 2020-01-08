@@ -72,7 +72,7 @@ public class JohnAutoVuforia extends Auto {
                 turn;
              }
              while (how_far_its_moved < how_far_it_should_move) {
-                move;
+                go;
              }
 
              */

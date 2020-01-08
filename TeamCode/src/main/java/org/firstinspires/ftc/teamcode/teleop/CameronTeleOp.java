@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.hardware.CameronRobot;
-import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
 @TeleOp(name = "Cameron Tele Op", group = "Cameron")
 public class CameronTeleOp extends OpMode {
@@ -17,11 +16,24 @@ public class CameronTeleOp extends OpMode {
 
         telemetry.addData("Robot", "Ready");
         telemetry.update();
+
+        robot.s0.setPosition(0.5);
+        robot.s1.setPosition(0.5);
     }
 
     @Override
     public void loop() {
-        robot.wheels.goJoystick(gamepad1);
-        robot.arm.go(gamepad2);
+        robot.go(gamepad1, gamepad2);
+        telemetry.addData("Left Stick X", gamepad1.left_stick_x);
+        telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
+        telemetry.addData("Right Stick X", gamepad1.right_stick_x);
+
+        if (gamepad1.right_bumper) {
+            robot.s0.setPosition(0.05);
+            robot.s1.setPosition(0.95);
+        } else if (gamepad1.left_bumper) {
+            robot.s0.setPosition(0.40);
+            robot.s1.setPosition(0.6);
+        }
     }
 }

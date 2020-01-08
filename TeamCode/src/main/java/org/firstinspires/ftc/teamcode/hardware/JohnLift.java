@@ -14,7 +14,7 @@ public class JohnLift {
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void move(double power) {
+    public void go(double power) {
         motor.setPower(0.75 * power);
     }
 }

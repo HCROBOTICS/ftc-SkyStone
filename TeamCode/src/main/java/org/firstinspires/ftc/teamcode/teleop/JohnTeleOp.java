@@ -40,32 +40,28 @@ public class JohnTeleOp extends OpMode {
 
     @Override
     public void loop() {
-        robot.wheels.goJoystick(gamepad1);
-
-        robot.lift.move(-gamepad2.left_stick_y);
-
+        robot.go(gamepad1, gamepad2);
+        robot.lift.go(-gamepad2.left_stick_y);
         robot.rotate.setPower(-gamepad2.right_stick_y / 2);
+        robot.wrist.setPower((gamepad2.right_trigger - gamepad2.left_trigger) / 2);
 
-        robot.wrist.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
-
-        // counter-rotate rotate to compensate for angle changes if lift is the only thing moving
-        if (gamepad2.left_stick_y != 0 && gamepad2.right_stick_y == 0) {
+        //// counter-rotate rotate to compensate for angle changes if lift is the only thing moving
+        /* if (gamepad2.left_stick_y != 0 && gamepad2.right_stick_y == 0) {
             robot.rotate.setPower((gamepad2.left_stick_y) / 5);
-        }
-
-        if (gamepad2.x) {
-            robot.lGrab.setPosition(0);
-            robot.rGrab.setPosition(1);
-        } else if (gamepad2.b) {
-            robot.lGrab.setPosition(1);
-            robot.rGrab.setPosition(0);
-        }
+        } */
 
         if (gamepad2.left_bumper) {
-            robot.drag.setPosition(0);
+            robot.lGrab.setPosition(0);
+            robot.rGrab.setPosition(0.5);
         } else if (gamepad2.right_bumper) {
-            robot.drag.setPosition(1);
+            robot.lGrab.setPosition(1);
+            robot.rGrab.setPosition(0.5);
         }
 
+        /* if (gamepad2.b) {
+            robot.drag.setPosition(0);
+        } else if (gamepad2.a) {
+            robot.drag.setPosition(1);
+        } */
     }
 }

@@ -9,16 +9,9 @@ import org.firstinspires.ftc.teamcode.hardware.PushBot;
 public class JohnAuto extends Auto {
     private PushBot robot;
 
-    enum Task {
-        START, MOVING, STOP, DONE
-    }
-
-    Task task = Task.START;
-
     @Override public void runOpMode() {
         robot = new PushBot(hardwareMap);
         robot.init();
-
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -28,15 +21,12 @@ public class JohnAuto extends Auto {
 
         waitForStart();
 
-
-
-
         while (opModeIsActive()) {
             /*
             switch (task) {
                 case START:
                     robot.wheels.encoderReset();
-                    robot.wheels.goJoystick(new ControllerCommand(Command.FORWARD));
+                    robot.wheels.go(new ControllerCommand(Command.FORWARD));
                     task = Task.MOVING;
                     break;
                 case MOVING:

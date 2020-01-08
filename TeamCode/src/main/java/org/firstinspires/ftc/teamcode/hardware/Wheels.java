@@ -69,7 +69,7 @@ public class Wheels {
         rb.setZeroPowerBehavior(mode);
     }
 
-    public void goJoystick(Gamepad gamepad) {
+    public void go(Gamepad gamepad) {
         /* This is evil. Don't change it without understanding it first. */
         lf.setPower(-gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
         rf.setPower(-gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);

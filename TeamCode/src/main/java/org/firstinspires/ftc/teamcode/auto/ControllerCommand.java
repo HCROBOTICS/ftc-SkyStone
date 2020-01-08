@@ -3,6 +3,12 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class ControllerCommand extends Gamepad {
+    /*
+     * This class can be instantiated to make fake gamepad inputs that you can give to the hardware
+     * objects to make them work without an actual controller. It also just feels cooler to do this
+     * instead of addressing the individual motors.
+     */
+
     enum Command {
         FORWARD, BACKWARD,
         STOP

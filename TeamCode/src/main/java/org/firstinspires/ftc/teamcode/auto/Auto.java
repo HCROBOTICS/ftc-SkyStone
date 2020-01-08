@@ -27,13 +27,20 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.mmPerInch;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
-@Autonomous(name = "Proto-Autonomous", group = "Hypothetical")
-@Disabled
-public class Auto extends LinearOpMode {
+@Autonomous(name = "Proto-Autonomous", group = "Joey")
+@Disabled public class Auto extends LinearOpMode {
     private PushBot robot;
     protected Vuforia vuforia;
 
+    enum State {
+        BEGIN, END
+    }
+
     @Override public void runOpMode() {
+        /*
+         * This can be used as a reference for how to use Vuforia.
+         */
+
         robot = new PushBot(hardwareMap);
         robot.init();
 
