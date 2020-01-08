@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
+import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
+
 @Autonomous (name = "John Auto")
 public class JohnAuto extends Auto {
     private PushBot robot;
@@ -22,92 +24,44 @@ public class JohnAuto extends Auto {
         waitForStart();
 
         while (opModeIsActive()) {
-            /*
-            switch (task) {
-                case START:
-                    robot.wheels.encoderReset();
-                    robot.wheels.go(new ControllerCommand(Command.FORWARD));
-                    task = Task.MOVING;
-                    break;
-                case MOVING:
-                    if (robot.wheels.rb.getCurrentPosition() > 2000)
-                        task = Task.STOP;
-                case STOP:
-                    robot.wheels.stop();
-                    task = Task.DONE;
-                    break;
-                default: break;
-            }
 
-             */
-
-
-            forward(3000);
-            break;
         }
-
-
-
-
-
-
-
-        //vuforia.stop();
     }
 
-    public void forward (long time) {
-        robot.wheels.lf.setPower(1);
-        robot.wheels.rf.setPower(1);
-        robot.wheels.lb.setPower(1);
-        robot.wheels.rb.setPower(1);
-        sleep(time);
-        robot.wheels.lf.setPower(0);
-        robot.wheels.rf.setPower(0);
-        robot.wheels.lb.setPower(0);
-        robot.wheels.rb.setPower(0);
+    void forward(int ticks) {
+        robot.wheels.go(new ControllerCommand(FORWARD));
+        robot.wheels.encoderReset();
+
+        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+
+        robot.wheels.go(new ControllerCommand(STOP));
     }
 
-    public void backward (long time) {
-        robot.wheels.lf.setPower(-1);
-        robot.wheels.rf.setPower(-1);
-        robot.wheels.lb.setPower(-1);
-        robot.wheels.rb.setPower(-1);
-        sleep(time);
-        robot.wheels.lf.setPower(0);
-        robot.wheels.rf.setPower(0);
-        robot.wheels.lb.setPower(0);
-        robot.wheels.rb.setPower(0);
+    void turnLeft(int ticks) {
+        robot.wheels.go(new ControllerCommand(TURN_LEFT));
+        robot.wheels.encoderReset();
+
+        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+
+        robot.wheels.go(new ControllerCommand(STOP));
     }
 
-    public void right (long time) {
-        robot.wheels.lf.setPower(-1);
-        robot.wheels.rf.setPower(1);
-        robot.wheels.lb.setPower(-1);
-        robot.wheels.rb.setPower(1);
-        sleep(time);
-        robot.wheels.lf.setPower(0);
-        robot.wheels.rf.setPower(0);
-        robot.wheels.lb.setPower(0);
-        robot.wheels.rb.setPower(0);
+    void turnRight (int ticks) {
+        robot.wheels.go(new ControllerCommand(TURN_RIGHT));
+        robot.wheels.encoderReset();
+
+        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+
+        robot.wheels.go(new ControllerCommand(STOP));
     }
 
-    public void left (long time) {
-        robot.wheels.lf.setPower(1);
-        robot.wheels.rf.setPower(-1);
-        robot.wheels.lb.setPower(1);
-        robot.wheels.rb.setPower(-1);
-        sleep(time);
-        robot.wheels.lf.setPower(0);
-        robot.wheels.rf.setPower(0);
-        robot.wheels.lb.setPower(0);
-        robot.wheels.rb.setPower(0);
-    }
+    void backward (int ticks) {
+        robot.wheels.go(new ControllerCommand(BACKWARD));
+        robot.wheels.encoderReset();
 
-    public void end() {
-        robot.wheels.lf.setPower(0);
-        robot.wheels.rf.setPower(0);
-        robot.wheels.lb.setPower(0);
-        robot.wheels.rb.setPower(0);
-    }
+        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
 
+        robot.wheels.go(new ControllerCommand(STOP));
+    }
 }
+

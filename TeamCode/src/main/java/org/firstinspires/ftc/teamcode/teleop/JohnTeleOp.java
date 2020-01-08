@@ -30,13 +30,6 @@ public class JohnTeleOp extends OpMode {
         telemetry.update();
     }
 
-    /*
-    @Override
-    public void start() {
-        robot.grab.setPosition(0);
-        robot.wrist.setPosition(0);
-    }
-    */
 
     @Override
     public void loop() {
@@ -50,12 +43,12 @@ public class JohnTeleOp extends OpMode {
             robot.rotate.setPower((gamepad2.left_stick_y) / 5);
         } */
 
-        if (gamepad2.left_bumper) {
-            robot.lGrab.setPosition(0);
-            robot.rGrab.setPosition(0.5);
-        } else if (gamepad2.right_bumper) {
-            robot.lGrab.setPosition(1);
-            robot.rGrab.setPosition(0.5);
+        if (gamepad2.left_bumper /* close */ ) {
+            robot.lGrab.setPosition(.15);
+            robot.rGrab.setPosition(.8);
+        } else if (gamepad2.right_bumper /* open */ ) {
+            robot.lGrab.setPosition(.5);
+            robot.rGrab.setPosition(.45);
         }
 
         /* if (gamepad2.b) {

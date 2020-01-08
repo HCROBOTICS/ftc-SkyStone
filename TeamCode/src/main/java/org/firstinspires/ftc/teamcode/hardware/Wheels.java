@@ -99,4 +99,8 @@ public class Wheels {
     public double ticksPerInch() {
         return motor.ticksPerRevolution / wheel.circumference();
     }
+
+    public int encoderAverageLeft() {
+        return Math.abs(lf.getCurrentPosition() + lb.getCurrentPosition()) / 2;
+    }
 }
