@@ -18,8 +18,8 @@ public class JohnRobot extends PushBot {
 
     public ColorSensor color_sensor_down;
 
-    public static double WRIST_SPEED = .005;
-    public static final double LUMOSITY = 100;
+    public static final double WRIST_SPEED = .005;
+    public static final double LUMOSITY = 1050;
 
 
     public JohnRobot(HardwareMap hw) {
