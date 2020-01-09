@@ -4,25 +4,16 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
-import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 @Autonomous (name = "John Nearside")
-public class JohnNearside extends Auto {
-    private JohnRobot robot;
-
-
-
-
+public class JohnNearside extends JohnAuto {
     @Override public void runOpMode() {
         robot = new JohnRobot(hardwareMap);
         robot.init();
-
-
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -32,57 +23,13 @@ public class JohnNearside extends Auto {
 
         waitForStart();
 
-
         while (opModeIsActive()) {
-            robot.wheels.go(new ControllerCommand(FORWARD));
-
-            while (robot.color_sensor_down.alpha() < JohnRobot.LUMOSITY); // waste time until the color is there
-
-            robot.wheels.stop();
+            driveToLine();
 
             break;
         }
 
-    }
-
-    void forward(int ticks) {
-        ticks *= JohnAuto.linear_mult;
-        robot.wheels.go(new ControllerCommand(FORWARD));
-        robot.wheels.encoderReset();
-
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
-
-        robot.wheels.go(new ControllerCommand(STOP));
-    }
-
-    void turnLeft(int ticks) {
-        ticks *= JohnAuto.turn_mult;
-        robot.wheels.go(new ControllerCommand(TURN_LEFT));
-        robot.wheels.encoderReset();
-
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
-
-        robot.wheels.go(new ControllerCommand(STOP));
-    }
-
-    void turnRight (int ticks) {
-        ticks *= JohnAuto.turn_mult;
-        robot.wheels.go(new ControllerCommand(TURN_RIGHT));
-        robot.wheels.encoderReset();
-
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
-
-        robot.wheels.go(new ControllerCommand(STOP));
-    }
-
-    void backward (int ticks) {
-        ticks *= JohnAuto.linear_mult;
-        robot.wheels.go(new ControllerCommand(BACKWARD));
-        robot.wheels.encoderReset();
-
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
-
-        robot.wheels.go(new ControllerCommand(STOP));
+        robot.stop();
     }
 }
 
