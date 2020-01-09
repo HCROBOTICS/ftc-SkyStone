@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.hardware.PushBot;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
-@Autonomous (name = "John Nearside")
+@Autonomous (name = "John Right Farside")
 public class JohnRightFarside extends Auto {
     private JohnRobot robot;
 
