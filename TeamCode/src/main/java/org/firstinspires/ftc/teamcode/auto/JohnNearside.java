@@ -7,6 +7,8 @@ import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+
+import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
@@ -36,7 +38,7 @@ public class JohnNearside extends Auto {
 
         while (opModeIsActive()) {
 
-            while (color_sensor_down.alpha() < 100) {
+            while (color_sensor_down.alpha() < JohnRobot.lumosity) {
                 robot.wheels.go(new ControllerCommand(FORWARD));
             }
 

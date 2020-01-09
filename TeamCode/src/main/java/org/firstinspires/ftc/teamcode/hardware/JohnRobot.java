@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 public class JohnRobot extends PushBot {
     public JohnLift lift;
 
@@ -17,6 +18,7 @@ public class JohnRobot extends PushBot {
 
 
     public static double WRIST_SPEED = .005;
+    public static double lumosity = 100;
 
     public JohnRobot(HardwareMap hw) {
         super(hw);

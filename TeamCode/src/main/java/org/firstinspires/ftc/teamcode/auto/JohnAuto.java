@@ -43,7 +43,7 @@ public class JohnAuto extends Auto {
         while (opModeIsActive()) {
 
             while (opModeIsActive()) {
-                while (color_sensor_down.alpha() > 100) {
+                while (color_sensor_down.alpha() < JohnRobot.lumosity) {
                     robot.wheels.go(new ControllerCommand(FORWARD));
                 }
             }
