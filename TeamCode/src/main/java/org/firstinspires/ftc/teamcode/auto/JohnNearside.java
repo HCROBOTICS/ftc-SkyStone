@@ -2,9 +2,11 @@
 
 package org.firstinspires.ftc.teamcode.auto;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
@@ -13,15 +15,15 @@ import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 public class JohnNearside extends Auto {
     private PushBot robot;
 
-
-
+    //this is the downward facing color sensor used to sense the field lines
+    ColorSensor color_sensor_down;
 
 
     @Override public void runOpMode() {
         robot = new PushBot(hardwareMap);
         robot.init();
 
-
+        color_sensor_down = hardwareMap.colorSensor.get("downColor");
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -29,13 +31,14 @@ public class JohnNearside extends Auto {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
-        waitForStart();
+
 
 
         while (opModeIsActive()) {
 
-            //this will soon be: move until we see the colored line
-            forward(1000);
+            while (color_sensor_down.alpha() < 100) {
+                robot.wheels.go(new ControllerCommand(FORWARD));
+            }
 
         }
 

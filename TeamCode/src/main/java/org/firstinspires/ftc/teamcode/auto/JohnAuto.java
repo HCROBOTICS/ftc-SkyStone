@@ -2,17 +2,23 @@
 
 package org.firstinspires.ftc.teamcode.auto;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.PushBot;
-
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 @Autonomous (name = "John Auto")
 public class JohnAuto extends Auto {
     private PushBot robot;
 
+    //this is the downward facing color sensor used to sense the field lines
+    ColorSensor color_sensor_down;
 
     // used to make auto-wide changes to distances the robot moves linearly
     public static final int linear_mult = 1;
@@ -24,7 +30,7 @@ public class JohnAuto extends Auto {
         robot = new PushBot(hardwareMap);
         robot.init();
 
-
+        color_sensor_down = hardwareMap.colorSensor.get("downColor");
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -32,14 +38,16 @@ public class JohnAuto extends Auto {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
-        waitForStart();
 
-        //the important jazz
+        // the important jazz
         while (opModeIsActive()) {
-            forward(1000 * linear_mult);
 
+            while (opModeIsActive()) {
+                while (color_sensor_down.alpha() > 100) {
+                    robot.wheels.go(new ControllerCommand(FORWARD));
+                }
+            }
         }
-
     }
 
     void forward(int ticks) {

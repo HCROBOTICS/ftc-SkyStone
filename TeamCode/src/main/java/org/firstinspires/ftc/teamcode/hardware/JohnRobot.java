@@ -27,6 +27,7 @@ public class JohnRobot extends PushBot {
         rGrab = hw.servo.get("rGrab");
         wrist = hw.dcMotor.get("wrist");
         //drag = hw.servo.get("drag");
+
     }
 
     @Override public void init() {
