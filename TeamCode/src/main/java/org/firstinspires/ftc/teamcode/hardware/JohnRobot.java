@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 public class JohnRobot extends PushBot {
     public JohnLift lift;
@@ -16,13 +16,15 @@ public class JohnRobot extends PushBot {
     public Servo rGrab;
     //public Servo drag;
 
+    public ColorSensor color_sensor_down;
 
     public static double WRIST_SPEED = .005;
-    public static double lumosity = 100;
+    public static final double LUMOSITY = 100;
+
 
     public JohnRobot(HardwareMap hw) {
         super(hw);
-
+        color_sensor_down = hw.colorSensor.get("downColor");
         lift = new JohnLift(hw.dcMotor.get("lift"));
         rotate = hw.dcMotor.get("rotate");
         lGrab = hw.servo.get("lGrab");

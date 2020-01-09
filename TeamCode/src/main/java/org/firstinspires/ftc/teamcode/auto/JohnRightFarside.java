@@ -12,17 +12,13 @@ import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 @Autonomous (name = "John Nearside")
 public class JohnRightFarside extends Auto {
-    private PushBot robot;
+    private JohnRobot robot;
 
     //this is the downward facing color sensor used to sense the field lines
-    ColorSensor color_sensor_down;
-
 
     @Override public void runOpMode() {
-        robot = new PushBot(hardwareMap);
+        robot = new JohnRobot(hardwareMap);
         robot.init();
-
-        color_sensor_down = hardwareMap.colorSensor.get("downColor");
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -37,7 +33,7 @@ public class JohnRightFarside extends Auto {
 
             forward (1000);
             turnRight(1000);
-            while (color_sensor_down.alpha() < JohnRobot.lumosity) {
+            while (robot.color_sensor_down.alpha() < JohnRobot.LUMOSITY) {
                 robot.wheels.go(new ControllerCommand(FORWARD));
             }
 
