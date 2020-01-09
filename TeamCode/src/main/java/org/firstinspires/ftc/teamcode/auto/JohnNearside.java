@@ -30,15 +30,17 @@ public class JohnNearside extends Auto {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
-
+        waitForStart();
 
 
         while (opModeIsActive()) {
+            robot.wheels.go(new ControllerCommand(FORWARD));
 
-            while (robot.color_sensor_down.alpha() < JohnRobot.LUMOSITY) {
-                robot.wheels.go(new ControllerCommand(FORWARD));
-            }
+            while (robot.color_sensor_down.alpha() < JohnRobot.LUMOSITY); // waste time until the color is there
 
+            robot.wheels.stop();
+
+            break;
         }
 
     }
