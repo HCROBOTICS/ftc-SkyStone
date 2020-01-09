@@ -43,6 +43,14 @@ public class JohnTeleOp extends OpMode {
             robot.rotate.setPower((gamepad2.left_stick_y) / 5);
         } */
 
+        telemetry.addData("alpha", robot.color_sensor_down.alpha());
+        if (gamepad1.a) {
+            robot.color_sensor_down.enableLed(true);
+        } else {
+            robot.color_sensor_down.enableLed(false);
+        }
+
+
         if (gamepad2.left_bumper /* close */ ) {
             robot.lGrab.setPosition(.15);
             robot.rGrab.setPosition(.8);
