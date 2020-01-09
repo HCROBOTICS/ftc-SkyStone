@@ -1,4 +1,4 @@
-// john is using this as base code for his multiple autonomous classes
+// eventually this class should be move until robot senses the color tape
 
 package org.firstinspires.ftc.teamcode.auto;
 
@@ -9,15 +9,12 @@ import org.firstinspires.ftc.teamcode.hardware.PushBot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
-@Autonomous (name = "John Auto")
-public class JohnAuto extends Auto {
+@Autonomous (name = "John Nearside")
+public class JohnNearside extends Auto {
     private PushBot robot;
 
 
-    // used to make auto-wide changes to distances the robot moves linearly
-    public static final int linear_mult = 1;
-    // used to make auto-wide changes to how much the robot turns
-    public static final int turn_mult = 1;
+
 
 
     @Override public void runOpMode() {
@@ -34,16 +31,18 @@ public class JohnAuto extends Auto {
 
         waitForStart();
 
-        //the important jazz
+
         while (opModeIsActive()) {
-            forward(1000 * linear_mult);
+
+            //this will soon be: move until we see the colored line
+            forward(1000);
 
         }
 
     }
 
     void forward(int ticks) {
-        ticks *= linear_mult;
+        ticks *= JohnAuto.linear_mult;
         robot.wheels.go(new ControllerCommand(FORWARD));
         robot.wheels.encoderReset();
 
@@ -53,7 +52,7 @@ public class JohnAuto extends Auto {
     }
 
     void turnLeft(int ticks) {
-        ticks *= turn_mult;
+        ticks *= JohnAuto.turn_mult;
         robot.wheels.go(new ControllerCommand(TURN_LEFT));
         robot.wheels.encoderReset();
 
@@ -63,7 +62,7 @@ public class JohnAuto extends Auto {
     }
 
     void turnRight (int ticks) {
-        ticks *= turn_mult;
+        ticks *= JohnAuto.turn_mult;
         robot.wheels.go(new ControllerCommand(TURN_RIGHT));
         robot.wheels.encoderReset();
 
@@ -73,7 +72,7 @@ public class JohnAuto extends Auto {
     }
 
     void backward (int ticks) {
-        ticks *= linear_mult;
+        ticks *= JohnAuto.linear_mult;
         robot.wheels.go(new ControllerCommand(BACKWARD));
         robot.wheels.encoderReset();
 
