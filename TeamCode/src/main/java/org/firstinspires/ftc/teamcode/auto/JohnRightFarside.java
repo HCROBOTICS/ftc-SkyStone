@@ -12,7 +12,6 @@ import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 @Autonomous (name = "John Right Farside")
 public class JohnRightFarside extends JohnAuto {
 
-    //this is the downward facing color sensor used to sense the field lines
 
     @Override public void runOpMode() {
         robot = new JohnRobot(hardwareMap);

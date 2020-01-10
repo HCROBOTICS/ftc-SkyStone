@@ -17,6 +17,7 @@ public class JohnRobot extends PushBot {
     //public Servo drag;
 
     public ColorSensor color_sensor_down;
+    public ColorSensor color_sensor_side;
 
     public static final double WRIST_SPEED = .005;
     public static final double LINE_LUMINOSITY = 1050;
@@ -25,6 +26,7 @@ public class JohnRobot extends PushBot {
     public JohnRobot(HardwareMap hw) {
         super(hw);
         color_sensor_down = hw.colorSensor.get("downColor");
+        color_sensor_side = hw.colorSensor.get("sideColor");
         lift = new JohnLift(hw.dcMotor.get("lift"));
         rotate = hw.dcMotor.get("rotate");
         lGrab = hw.servo.get("lGrab");

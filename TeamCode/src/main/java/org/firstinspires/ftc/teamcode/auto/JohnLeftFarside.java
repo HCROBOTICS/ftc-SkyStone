@@ -34,6 +34,7 @@ public class JohnLeftFarside extends JohnAuto {
         }
 
         robot.stop();
+
     }
 }
 
