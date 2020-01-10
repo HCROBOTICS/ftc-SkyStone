@@ -55,6 +55,7 @@ public class JohnRobot extends PushBot {
 
         rotate.setPower(0);
         rotate.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rotate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     @Override public void go(Gamepad gamepad1, Gamepad gamepad2) {

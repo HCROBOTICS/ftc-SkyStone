@@ -34,11 +34,15 @@ public class JohnComplexBlueLeft extends JohnAuto{
         turnLeft(LEFT_TURN);
 
         grab_skystone();
+
+        HarleyDeath();
     }
 
     private void grab_skystone() {
         forward(100);
-
+        //lower rotate
+        //grab block
+        
     }
 
     private void find_skystone() {
@@ -54,5 +58,11 @@ public class JohnComplexBlueLeft extends JohnAuto{
         robot.wheels.rf.setDirection(DcMotor.Direction.FORWARD);
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    private void HarleyDeath() {
+        robot.wheels.stop();
+        robot.stop();
+        robot.wheels.encoderReset();
     }
 }

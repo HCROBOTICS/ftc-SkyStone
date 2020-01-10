@@ -52,7 +52,9 @@ public class JohnAuto extends Auto {
         robot.wheels.encoderReset();
 
         /* Wait until the motors have moved enough. */
-        while (robot.wheels.encoderAverageLeft() < ticks);
+        while (robot.wheels.encoderAverageLeft() < ticks) {
+            if (!opModeIsActive()) break;
+        }
 
         robot.stop();
     }
@@ -62,7 +64,9 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(TURN_LEFT));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+        while (robot.wheels.encoderAverageLeft() < ticks) {
+            if (!opModeIsActive()) break;
+        } // do nothing
 
         robot.stop();
     }
@@ -82,7 +86,9 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(BACKWARD));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+        while (robot.wheels.encoderAverageLeft() < ticks) {
+            if (!opModeIsActive()) break;
+        } // do nothing
 
         robot.wheels.stop();
     }
@@ -91,7 +97,9 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(FORWARD));
 
         /* Wait until the color sensor sees a line. */
-        while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY);
+        while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY) {
+            if (!opModeIsActive()) break;
+        }
 
         robot.wheels.stop();
     }
