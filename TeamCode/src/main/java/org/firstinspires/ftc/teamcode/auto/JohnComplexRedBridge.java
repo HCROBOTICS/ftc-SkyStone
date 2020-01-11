@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
 @Autonomous (name = "John Complex Red Bridge")
-@Disabled public class JohnComplexRedBridge extends JohnAuto{
+public class JohnComplexRedBridge extends JohnAuto{
 
     @Override
     public void runOpMode() {

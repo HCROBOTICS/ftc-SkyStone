@@ -3,14 +3,15 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
-@Autonomous (name = "John Complex Blue Bridge")
-public class JohnComplexBlueBridge extends JohnAuto {
+@Autonomous(name = "John Complex Red Depot")
+public class JohnComplexRedDepot extends JohnAuto{
 
     @Override
     public void runOpMode() {
         robot = new JohnRobot(hardwareMap);
         robot.init();
         wheelsInit();
+        resetRotate();
 
         waitForStart();
 
@@ -19,9 +20,10 @@ public class JohnComplexBlueBridge extends JohnAuto {
                 //move rotate so we fit under the bridge
             }
 
-            forward(1000);
+            forward(500);
             turnRight(RIGHT_TURN);
-            forward(1000);
+            forward(500);
+            turnRight(RIGHT_TURN);
 
             while (robot.color_sensor_side.red() > 127.5) {
                 robot.wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
@@ -33,16 +35,20 @@ public class JohnComplexBlueBridge extends JohnAuto {
 
             grab_skystone();
 
-            backward(100);
-            turnLeft(LEFT_TURN);
-            forward(3000);
+            backward(600);
+
             turnRight(RIGHT_TURN);
+            forward(4000);
+            turnLeft(LEFT_TURN);
+            forward(1000);
 
             release_skystone();
 
-            backward(300);
-            turnRight(RIGHT_TURN);
+            // drop drag mechanism
 
+            backward(1050);
+
+            turnLeft(LEFT_TURN);
             driveToLine();
 
             break;
