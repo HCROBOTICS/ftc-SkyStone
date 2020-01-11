@@ -2,11 +2,11 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
-@Disabled
 @Autonomous (name = "John Complex Blue Bridge")
-public class JohnComplexBlueBridge extends JohnAuto {
+@Disabled public class JohnComplexBlueBridge extends JohnAuto {
 
     @Override
     public void runOpMode() {
@@ -17,6 +17,10 @@ public class JohnComplexBlueBridge extends JohnAuto {
         waitForStart();
 
         while (opModeIsActive()) {
+            while (Math.abs(robot.rotate.getCurrentPosition()) < 100) {
+                //move rotate so we fit under the bridge
+            }
+
             forward(1000);
             turnRight(RIGHT_TURN);
             forward(1000);

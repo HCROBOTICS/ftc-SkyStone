@@ -6,12 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.auto.Auto;
+import org.firstinspires.ftc.teamcode.auto.ControllerCommand;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
-@Disabled
+
 @Autonomous (name = "John Drive To Line")
-public class JohnAuto extends Auto {
+@Disabled public class JohnAuto extends Auto {
     protected JohnRobot robot;
 
     // used for making ninety-degree turns
@@ -21,7 +23,6 @@ public class JohnAuto extends Auto {
     void forward(int ticks) {
         robot.wheels.go(new ControllerCommand(FORWARD));
         robot.wheels.encoderReset();
-
         /* Wait until the motors have moved enough. */
         while (robot.wheels.encoderAverageLeft() < ticks) {
             if (!opModeIsActive()) break;
@@ -81,10 +82,20 @@ public class JohnAuto extends Auto {
     }
 
     void grab_skystone(){
-
+        //lower rotate
+        robot.rGrab.setPosition(.8);
+        robot.lGrab.setPosition(.15);
+        //raise rotate
     }
     void release_skystone() {
+        robot.rGrab.setPosition(.45);
+        robot.lGrab.setPosition(.5);
+        //raise rotate?
+    }
 
+    void resetRotate() {
+        robot.rotate.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rotate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
 
