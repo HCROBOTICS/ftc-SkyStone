@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
-@Autonomous (name = "John Left Farside")
+@Autonomous (name = "John Start Left Farside")
 public class JohnLeftFarside extends JohnAuto {
 
     @Override public void runOpMode() {
@@ -14,8 +14,8 @@ public class JohnLeftFarside extends JohnAuto {
         waitForStart();
 
         while (opModeIsActive()) {
-            forward (1000);
-            turnLeft(LEFT_TURN);
+            forward (FARSIDE_FORWARD);
+            turnRight(RIGHT_TURN);
             driveToLine();
             break;
         }

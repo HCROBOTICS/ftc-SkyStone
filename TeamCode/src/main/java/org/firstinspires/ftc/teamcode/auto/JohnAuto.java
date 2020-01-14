@@ -12,13 +12,14 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
-@Autonomous (name = "John Drive To Line")
-@Disabled public class JohnAuto extends Auto {
+public class JohnAuto extends Auto {
     protected JohnRobot robot;
 
     // used for making ninety-degree turns
     public static final int RIGHT_TURN = 2700;
     public static final int LEFT_TURN = -2700;
+
+    public static final int FARSIDE_FORWARD = 1000;
 
     void forward(int ticks) {
         robot.wheels.go(new ControllerCommand(FORWARD));
