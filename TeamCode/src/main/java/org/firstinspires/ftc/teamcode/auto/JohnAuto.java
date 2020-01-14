@@ -1,4 +1,5 @@
-//this class will not be used in matches, only as an inherited class
+// this class will not be used in matches, only as an inherited class
+// it's just gonna turn into variables and methods
 
 package org.firstinspires.ftc.teamcode.auto;
 
@@ -19,7 +20,18 @@ public class JohnAuto extends Auto {
     public static final int RIGHT_TURN = 2700;
     public static final int LEFT_TURN = -2700;
 
-    public static final int FARSIDE_FORWARD = 1000;
+    // how far we go to align ourselves with the blocks
+    public static final int INITIAL_FORWARD = 3400
+            ;
+
+    // sensor value to determine if block is skystone:
+    //  pure yellow = 255 red, 255 green,   0 blue
+    //  pure black =    0 red,   0 green,   0 blue
+    public static final int RED_SENSOR_VALUE = 125;
+
+    // how far to move rotate to fit under bridge
+    // sorry but I couldn't think of a better name
+    public static final int ROTATE_ROTATION = 10;
 
     void forward(int ticks) {
         robot.wheels.go(new ControllerCommand(FORWARD));
@@ -65,6 +77,17 @@ public class JohnAuto extends Auto {
 
     void driveToLine() {
         robot.wheels.go(new ControllerCommand(FORWARD));
+
+        /* Wait until the color sensor sees a line. */
+        while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY) {
+            if (!opModeIsActive()) break;
+        }
+
+        robot.wheels.stop();
+    }
+
+    void driveToLineReverse() {
+        robot.wheels.go(new ControllerCommand(BACKWARD));
 
         /* Wait until the color sensor sees a line. */
         while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY) {

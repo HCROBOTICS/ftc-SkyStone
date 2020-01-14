@@ -1,4 +1,3 @@
-// eventually this class should be move until robot senses the color tape
 
 package org.firstinspires.ftc.teamcode.auto;
 
@@ -17,7 +16,7 @@ public class JohnNearside extends JohnAuto {
 
         while (opModeIsActive()) {
 
-            driveToLine();
+            driveToLineReverse();
             break;
 
         }

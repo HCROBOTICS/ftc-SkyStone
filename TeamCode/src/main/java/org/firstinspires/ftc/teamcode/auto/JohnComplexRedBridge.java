@@ -11,20 +11,21 @@ public class JohnComplexRedBridge extends JohnAuto{
         robot = new JohnRobot(hardwareMap);
         robot.init();
         wheelsInit();
+        resetRotate();
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-            while (Math.abs(robot.rotate.getCurrentPosition()) < 100) {
-                //move rotate so we fit under the bridge
+            while (Math.abs(robot.rotate.getCurrentPosition()) < ROTATE_ROTATION) {
+                robot.rotate.setPower(-0.5);
             }
 
-            forward(1000);
+            forward(INITIAL_FORWARD);
             turnRight(RIGHT_TURN);
             backward(1000);
 
-            while (robot.color_sensor_side.red() > 127.5) {
+            while (robot.color_sensor_side.red() > RED_SENSOR_VALUE) {
                 robot.wheels.go(new ControllerCommand(ControllerCommand.Command.BACKWARD));
             }
 
