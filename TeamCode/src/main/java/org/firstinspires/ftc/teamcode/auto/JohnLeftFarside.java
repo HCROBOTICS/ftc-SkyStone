@@ -14,14 +14,12 @@ public class JohnLeftFarside extends JohnAuto {
         waitForStart();
 
         while (opModeIsActive()) {
-            resetRotate();
-
-            while (Math.abs(robot.rotate.getCurrentPosition()) < ROTATE_ROTATION) {
-                robot.rotate.setPower(-0.5);
-            }
+            initGrab();
 
             forward (INITIAL_FORWARD);
+            sleep(500);
             turnRight(RIGHT_TURN);
+            sleep(500);
             driveToLine();
             break;
         }

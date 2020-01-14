@@ -17,12 +17,11 @@ public class JohnAuto extends Auto {
     protected JohnRobot robot;
 
     // used for making ninety-degree turns
-    public static final int RIGHT_TURN = 2700;
-    public static final int LEFT_TURN = -2700;
+    public static final int RIGHT_TURN = 2500;
+    public static final int LEFT_TURN = RIGHT_TURN;
 
     // how far we go to align ourselves with the blocks
-    public static final int INITIAL_FORWARD = 3400
-            ;
+    public static final int INITIAL_FORWARD = 3500;
 
     // sensor value to determine if block is skystone:
     //  pure yellow = 255 red, 255 green,   0 blue
@@ -120,6 +119,11 @@ public class JohnAuto extends Auto {
     void resetRotate() {
         robot.rotate.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rotate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    void initGrab() {
+        robot.lGrab.setPosition(1);
+        robot.rGrab.setPosition(0);
     }
 }
 

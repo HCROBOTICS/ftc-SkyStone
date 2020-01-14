@@ -15,8 +15,8 @@ public class JohnNearside extends JohnAuto {
         waitForStart();
 
         while (opModeIsActive()) {
-
-            driveToLineReverse();
+            initGrab();
+            driveToLine();
             break;
 
         }
