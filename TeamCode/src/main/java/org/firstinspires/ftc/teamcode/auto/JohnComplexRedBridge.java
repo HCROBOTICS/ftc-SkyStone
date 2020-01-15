@@ -1,3 +1,5 @@
+// waiting on values test
+
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,12 +19,12 @@ public class JohnComplexRedBridge extends JohnAuto{
 
         while (opModeIsActive()) {
 
-            while (Math.abs(robot.rotate.getCurrentPosition()) < ROTATE_ROTATION) {
-                robot.rotate.setPower(-0.5);
-            }
+            initGrab();
 
             forward(INITIAL_FORWARD);
-            turnRight(RIGHT_TURN);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
             backward(1000);
 
             while (robot.color_sensor_side.red() > RED_SENSOR_VALUE) {
@@ -30,20 +32,34 @@ public class JohnComplexRedBridge extends JohnAuto{
             }
 
             backward(150);
-            turnLeft(LEFT_TURN);
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
             forward(100);
+            sleep(SLEEP_TIME);
 
             grab_skystone();
 
+            sleep(SLEEP_TIME);
             backward(100);
-            turnRight(RIGHT_TURN);
-            forward(3000);
-            turnLeft(LEFT_TURN);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
+
+            driveToLine();
+            forward(4000);
+
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
 
             release_skystone();
 
+            sleep(SLEEP_TIME);
             backward(300);
-            turnLeft(LEFT_TURN);
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
 
             driveToLine();
 

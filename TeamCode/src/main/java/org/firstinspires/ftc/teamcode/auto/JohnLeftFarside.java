@@ -18,7 +18,7 @@ public class JohnLeftFarside extends JohnAuto {
 
             forward (INITIAL_FORWARD);
             sleep(500);
-            turnRight(RIGHT_TURN);
+            turnRight(TURN);
             sleep(500);
             driveToLine();
             break;

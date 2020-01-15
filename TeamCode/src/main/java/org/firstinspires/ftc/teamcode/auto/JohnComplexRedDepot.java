@@ -1,3 +1,5 @@
+// waiting on values test
+
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -16,41 +18,64 @@ public class JohnComplexRedDepot extends JohnAuto{
         waitForStart();
 
         while (opModeIsActive()) {
-            while (Math.abs(robot.rotate.getCurrentPosition()) < ROTATE_ROTATION) {
-                robot.rotate.setPower(-0.5);
-            }
+
+            initGrab();
 
             driveToLine();
             forward(250);
-            turnRight(RIGHT_TURN);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
             forward(INITIAL_FORWARD);
-            turnRight(RIGHT_TURN);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
 
             while (robot.color_sensor_side.red() > RED_SENSOR_VALUE) {
                 robot.wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
             }
 
             forward(150);
-            turnLeft(LEFT_TURN);
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
             forward(100);
+            sleep(SLEEP_TIME);
 
             grab_skystone();
 
-            backward(600);
+            sleep(SLEEP_TIME);
 
-            turnRight(RIGHT_TURN);
-            forward(4000);
-            turnLeft(LEFT_TURN);
+            driveToLineReverse();
+            backward(300);
+
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+
+            // yes theres supposed to be three
+            driveToLine();
+            driveToLine();
+            driveToLine();
+
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
             forward(1000);
+            sleep(SLEEP_TIME);
 
             release_skystone();
 
             // drop drag mechanism
 
-            backward(1050);
+            sleep(SLEEP_TIME);
+            driveToLineReverse();
 
-            turnLeft(LEFT_TURN);
-            driveToLine();
+            // raise drag mechanism
+
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
+            driveToLineReverse();
 
             break;
         }

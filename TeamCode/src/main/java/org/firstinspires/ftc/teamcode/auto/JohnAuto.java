@@ -3,34 +3,28 @@
 
 package org.firstinspires.ftc.teamcode.auto;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.teamcode.auto.Auto;
-import org.firstinspires.ftc.teamcode.auto.ControllerCommand;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
-
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 public class JohnAuto extends Auto {
     protected JohnRobot robot;
 
     // used for making ninety-degree turns
-    public static final int RIGHT_TURN = 2500;
-    public static final int LEFT_TURN = RIGHT_TURN;
-
+    public static final int TURN = 2500;
     // how far we go to align ourselves with the blocks
     public static final int INITIAL_FORWARD = 3500;
 
-    // sensor value to determine if block is skystone:
-    //  pure yellow = 255 red, 255 green,   0 blue
-    //  pure black =    0 red,   0 green,   0 blue
+    /* sensor value to determine if block is skystone:
+      OFFICIAL FIRST RED:  (237,  28,  36)
+      OFFICIAL FIRST BLUE: (  0, 101, 179)
+      OFFICIAL FIRST GRAY: (153, 153, 154)
+      https://www.firstinspires.org/sites/default/files/uploads/resource_library/first-brand-guidelines-web-2015.pdf
+    */
     public static final int RED_SENSOR_VALUE = 125;
 
-    // how far to move rotate to fit under bridge
-    // sorry but I couldn't think of a better name
-    public static final int ROTATE_ROTATION = 10;
+    // how long we sleep
+    public static final int SLEEP_TIME = 100;
 
     void forward(int ticks) {
         robot.wheels.go(new ControllerCommand(FORWARD));

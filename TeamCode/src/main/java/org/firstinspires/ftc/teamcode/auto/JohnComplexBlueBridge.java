@@ -1,3 +1,5 @@
+// waiting on values test
+
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -20,37 +22,43 @@ public class JohnComplexBlueBridge extends JohnAuto {
             initGrab();
 
             forward(INITIAL_FORWARD);
-            sleep(100);
-            turnRight(RIGHT_TURN);
-            sleep(100);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
             forward(1000);
-            sleep(100);
+
             while (robot.color_sensor_side.red() > RED_SENSOR_VALUE) {
                 robot.wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
             }
-            sleep(100);
-            forward(150);
-            sleep(100);
-            turnLeft(LEFT_TURN);
-            sleep(100);
+
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
             forward(100);
+            sleep(SLEEP_TIME);
 
             grab_skystone();
 
+            sleep(SLEEP_TIME);
             backward(100);
-            sleep(25);
-            turnLeft(LEFT_TURN);
-            sleep(25);
-            forward(3000);
-            sleep(25);
-            turnRight(RIGHT_TURN);
-            sleep(25);
+            sleep(SLEEP_TIME);
+            turnLeft(TURN);
+            sleep(SLEEP_TIME);
+
+            driveToLine();
+            forward(4000);
+
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
+
             release_skystone();
-            sleep(25);
+
+            sleep(SLEEP_TIME);
             backward(300);
-            sleep(25);
-            turnRight(RIGHT_TURN);
-            sleep(25);
+            sleep(SLEEP_TIME);
+            turnRight(TURN);
+            sleep(SLEEP_TIME);
 
             driveToLine();
 
