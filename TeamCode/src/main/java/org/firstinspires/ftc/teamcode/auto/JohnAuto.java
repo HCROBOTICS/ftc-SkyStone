@@ -30,7 +30,7 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(FORWARD));
         robot.wheels.encoderReset();
         /* Wait until the motors have moved enough. */
-        while (robot.wheels.encoderAverageLeft() < ticks) {
+        while (robot.wheels.encoderAverageJohn() < ticks) {
             if (!opModeIsActive()) break;
         }
 
@@ -41,7 +41,7 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(TURN_LEFT));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageLeft() < ticks) {
+        while (robot.wheels.encoderAverageJohn() < ticks) {
             if (!opModeIsActive()) break;
         } // do nothing
 
@@ -52,7 +52,7 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(TURN_RIGHT));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageLeft() < ticks); // do nothing
+        while (robot.wheels.encoderAverageJohn() < ticks); // do nothing
 
         robot.stop();
     }
@@ -61,7 +61,7 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(BACKWARD));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageLeft() < ticks) {
+        while (robot.wheels.encoderAverageJohn() < ticks) {
             if (!opModeIsActive()) break;
         }
 

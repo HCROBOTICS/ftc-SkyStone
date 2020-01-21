@@ -32,10 +32,6 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
     private PushBot robot;
     protected Vuforia vuforia;
 
-    enum State {
-        BEGIN, END
-    }
-
     @Override public void runOpMode() {
         /*
          * This can be used as a reference for how to use Vuforia.
@@ -52,22 +48,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
         vuforia.start();
 
         while (!isStopRequested()) {
-            VuforiaTrackable look = vuforia.look();
 
-            if (look != null) {
-                // express position (translation) of robot in inches.
-                VectorF translation = vuforia.getLastLocation().getTranslation();
-                telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-
-                // express the rotation of the robot in degrees.
-                Orientation rotation = Orientation.getOrientation(vuforia.getLastLocation(), EXTRINSIC, XYZ, DEGREES);
-                telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
-            } else {
-                telemetry.addData("Visible Target", "none");
-            }
-
-            telemetry.update();
         }
 
         vuforia.stop();

@@ -3,16 +3,21 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.hardware.CameronRobot;
+import org.firstinspires.ftc.teamcode.hardware.Odometer;
 
 @TeleOp(name = "Cameron Tele Op", group = "Cameron")
 public class CameronTeleOp extends OpMode {
     CameronRobot robot;
+    Odometer odometer;
 
     @Override
     public void init() {
         robot = new CameronRobot(hardwareMap);
         robot.init();
+
+        odometer = new Odometer(robot.wheels, new Position());
 
         telemetry.addData("Robot", "Ready");
         telemetry.update();

@@ -4,16 +4,22 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
+import org.firstinspires.ftc.teamcode.hardware.Odometer;
 
 @TeleOp(name = "John Tele Op", group = "John")
 public class JohnTeleOp extends OpMode {
     JohnRobot robot;
+    Odometer odometer;
 
     @Override
     public void init() {
         robot = new JohnRobot(hardwareMap);
         robot.init();
+
+        odometer = new Odometer(robot.wheels, new Position());
+        robot.wheels.encoderReset();
 
         // Compensate for the fact that the motors all face a different direction.
         robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
@@ -46,11 +52,13 @@ public class JohnTeleOp extends OpMode {
         telemetry.addData("Down Alpha", robot.color_sensor_down.alpha());
         telemetry.addData("Side Alpha", robot.color_sensor_side.alpha());
 
+        telemetry.addData("Forward Distance", odometer.getDistanceForward());
+
         if (gamepad1.b) {
             robot.wheels.encoderReset();
             telemetry.addData("Encoders", "Reset");
         } else
-            telemetry.addData("Left Encoder Average", robot.wheels.encoderAverageLeft());
+            telemetry.addData("Left Encoder Average", robot.wheels.encoderAverageJohn());
 
         if (gamepad2.left_bumper /* close */ ) {
             robot.lGrab.setPosition(.15);

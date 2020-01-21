@@ -100,7 +100,24 @@ public class Wheels {
         return motor.ticksPerRevolution / wheel.circumference();
     }
 
-    public int encoderAverageLeft() {
+    /* John likes working with an absolute value. */
+    public int encoderAverageJohn() {
         return Math.abs(lf.getCurrentPosition() + lb.getCurrentPosition()) / 2;
+    }
+
+    public int encoderAverageLeft() {
+        return (lf.getCurrentPosition() + lb.getCurrentPosition()) / 2;
+    }
+
+    public int encoderAverageRight() {
+        return (rf.getCurrentPosition() + rb.getCurrentPosition()) / 2;
+    }
+
+    public int encoderAverageFront() {
+        return (lf.getCurrentPosition() + rf.getCurrentPosition()) / 2;
+    }
+
+    public int encoderAverageBack() {
+        return (lb.getCurrentPosition() + rb.getCurrentPosition()) / 2;
     }
 }
