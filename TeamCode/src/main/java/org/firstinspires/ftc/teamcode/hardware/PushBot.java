@@ -4,13 +4,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+
 public class PushBot {
     private HardwareMap hw;
     public Wheels wheels;
+    public Odometer odometer;
 
     public PushBot(HardwareMap hw) {
         this.hw = hw;
         wheels = new Wheels(hw);
+        odometer = new Odometer(wheels, new Position());
     }
 
     public void init() {

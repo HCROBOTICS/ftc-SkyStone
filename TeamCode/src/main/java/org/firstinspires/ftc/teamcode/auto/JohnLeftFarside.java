@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
+import static java.lang.Math.min;
+
 @Autonomous (name = "John Start Left Farside")
 public class JohnLeftFarside extends JohnAuto {
 
@@ -16,7 +18,26 @@ public class JohnLeftFarside extends JohnAuto {
         while (opModeIsActive()) {
             initGrab();
 
-            forward (INITIAL_FORWARD);
+            robot.wheels.encoderReset();
+            while (opModeIsActive()) {
+                double current = -robot.odometer.getDistanceForward();
+                if (Math.abs(current) < .2) current = 0;
+                double target = 30;
+                double distanceFromTarget = target - current;
+
+                double speed_down = distanceFromTarget / 6; // as it slows down near the target
+                double speed_up  = -current            / 6; // as it speeds up from the start
+                double speed = min(speed_down, speed_up);
+                if (speed < -1) speed = -1;
+
+                telemetry.addData("Current", current);
+                telemetry.addData("Target", target);
+                telemetry.addData("distanceFromTarget", distanceFromTarget);
+                telemetry.addData("Speed", speed);
+                telemetry.update();
+                robot.wheels.go(gamepad1);
+            }
+
             sleep(500);
             turnRight(TURN);
             sleep(500);

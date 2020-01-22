@@ -11,7 +11,7 @@ public class Odometer {
     private Wheels wheels;
     private Position position;
 
-    private final int GO_SPEED_BOUND = 500;
+    private final double GO_SPEED_BOUND = 3;
     private int progress = 0;
     private double speed = 0;
 
@@ -36,7 +36,7 @@ public class Odometer {
         return r;
     }
 
-    /* goDistanceForward() is iterative. It returns true until it reaches its target. */
+    /*// goDistanceForward() is iterative. It returns true until it reaches its target.
     public boolean goDistanceForward(double inches) {
         wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         
@@ -53,8 +53,9 @@ public class Odometer {
 
         if (distanceFromTarget < 100)
             return false;
-        else return true;
-    }
+        else
+            return true;
+    } */
 
     public Position getPosition() {
         return position;

@@ -64,8 +64,8 @@ public class JohnTeleOp extends OpMode {
             robot.lGrab.setPosition(.15);
             robot.rGrab.setPosition(.8);
         } else if (gamepad2.right_bumper /* open */ ) {
-            robot.lGrab.setPosition(.5);
-            robot.rGrab.setPosition(.45);
+            robot.lGrab.setPosition(.6);
+            robot.rGrab.setPosition(.25);
         }
 
     }
