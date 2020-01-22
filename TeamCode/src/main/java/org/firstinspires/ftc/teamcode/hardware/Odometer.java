@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.auto.ControllerCommand;
 
+import static java.lang.Math.min;
+
 public class Odometer {
     private Wheels wheels;
     private Position position;
@@ -42,7 +44,9 @@ public class Odometer {
         int distanceFromTarget = targetTicks - currentTicks;
 
         // Yeah, this will need some improvement.
-        float speed = distanceFromTarget / GO_SPEED_BOUND;
+        float speed_down = distanceFromTarget / GO_SPEED_BOUND; // as it slows down near the target
+        float speed_up  = -currentTicks       / GO_SPEED_BOUND; // as it speeds up from the start
+        float speed = min(speed_down, speed_up);
         if (speed > 1) speed = 1;
         wheels.go(new ControllerCommand(0, -speed, 0, 0));
 
