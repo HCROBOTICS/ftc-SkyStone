@@ -44,26 +44,15 @@ public class Odometer {
         int distanceFromTarget = targetTicks - currentTicks;
 
         // Yeah, this will need some improvement.
-        float speed_down = distanceFromTarget / GO_SPEED_BOUND; // as it slows down near the target
-        float speed_up  = -currentTicks       / GO_SPEED_BOUND; // as it speeds up from the start
-        float speed = min(speed_down, speed_up);
+        double speed_down = distanceFromTarget / GO_SPEED_BOUND; // as it slows down near the target
+        double speed_up  = -currentTicks       / GO_SPEED_BOUND; // as it speeds up from the start
+        double speed = min(speed_down, speed_up);
         if (speed > 1) speed = 1;
-        wheels.go(new ControllerCommand(0, -speed, 0, 0));
+        wheels.go(new ControllerCommand(0, (float) -speed, 0, 0));
 
-        /* if (currentTicks > GO_SPEED_BOUND && distanceFromTarget > GO_SPEED_BOUND)
-            // full speed forward
-            wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
-        else if (distanceFromTarget < GO_SPEED_BOUND) {
-            float r = distanceFromTarget / GO_SPEED_BOUND;
-            // go forwards at partial speed
-            wheels.go(new ControllerCommand(0, -r, 0, 0));
-        } else if (progress < GO_SPEED_BOUND) {
-            float r = progress / GO_SPEED_BOUND;
-            // same thing
-            wheels.go(new ControllerCommand(0, -r, 0, 0));
-        } */
-
-        return true;
+        if (distanceFromTarget < 100)
+            return false;
+        else return true;
     }
 
     public Position getPosition() {
