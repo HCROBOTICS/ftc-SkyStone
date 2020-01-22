@@ -39,6 +39,7 @@ public class Odometer {
     /* goDistanceForward() is iterative. It returns true until it reaches its target. */
     public boolean goDistanceForward(double inches) {
         wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        
         int targetTicks = (int)(wheels.ticksPerInch() * inches);
         int currentTicks = (wheels.encoderAverageLeft() + wheels.encoderAverageRight()) / 2;
         int distanceFromTarget = targetTicks - currentTicks;
