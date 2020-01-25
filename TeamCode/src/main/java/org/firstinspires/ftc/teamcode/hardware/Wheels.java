@@ -105,7 +105,7 @@ public class Wheels {
         return motor.ticksPerRevolution / wheel.circumference();
     }
 
-    /* John likes working with an absolute value. */
+    /* John likes working with absolute values. */
     public int encoderAverageJohn() {
         return Math.abs(lf.getCurrentPosition() + lb.getCurrentPosition()) / 2;
     }

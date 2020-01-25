@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Func;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.auto.ControllerCommand;
 
@@ -26,10 +29,6 @@ public class Odometer {
     /* -Y is forwards; +Y is backwards */
     public double getDistanceY() {
         return wheels.encoderAverageY() / wheels.ticksPerInch();
-    }
-
-    public void goY(double inches) {
-        double toGo = getDistanceY() - inches;
     }
 
     /* This stuff will be used later. */

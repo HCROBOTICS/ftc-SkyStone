@@ -37,5 +37,14 @@ public class CameronTeleOp extends OpMode {
             robot.s0.setPosition(0.6);
             robot.s1.setPosition(0.4);
         }
+
+        telemetry.addData("X", odometer.getDistanceX());
+        telemetry.addData("Y", odometer.getDistanceY());
+        telemetry.addData("Turn", robot.wheels.encoderAverageJohn());
+
+        if (gamepad1.b) {
+            robot.wheels.encoderReset();
+            telemetry.addData("Encoders", "reset");
+        }
     }
 }
