@@ -20,7 +20,7 @@ public class JohnLeftFarside extends JohnAuto {
 
             robot.wheels.encoderReset();
             while (opModeIsActive()) {
-                double current = -robot.odometer.getDistanceForward();
+                double current = -robot.odometer.getDistanceY();
                 if (Math.abs(current) < .2) current = 0;
                 double target = 30;
                 double distanceFromTarget = target - current;

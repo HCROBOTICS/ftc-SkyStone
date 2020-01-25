@@ -60,6 +60,11 @@ public class Wheels {
         rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // Compensate for the fact that the motors all face a different direction.
+        lf.setDirection(DcMotor.Direction.REVERSE);
+        rf.setDirection(DcMotor.Direction.FORWARD);
+        lb.setDirection(DcMotor.Direction.REVERSE);
+        rb.setDirection(DcMotor.Direction.FORWARD);
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior mode) {
@@ -71,10 +76,10 @@ public class Wheels {
 
     public void go(Gamepad gamepad) {
         /* This is evil. Don't change it without understanding it first. */
-        lf.setPower(-gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
-        rf.setPower(-gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
-        lb.setPower(-gamepad.left_stick_y + gamepad.right_stick_x - gamepad.left_stick_x);
-        rb.setPower(-gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
+        lf.setPower(-gamepad.left_stick_y + gamepad.right_stick_x - gamepad.left_stick_x);
+        rf.setPower(-gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
+        lb.setPower(-gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
+        rb.setPower(-gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
     }
 
     public void encoderReset() {
@@ -119,5 +124,18 @@ public class Wheels {
 
     public int encoderAverageBack() {
         return (lb.getCurrentPosition() + rb.getCurrentPosition()) / 2;
+    }
+
+    /* -X is left; +X is right */
+    public int encoderAverageX() {
+        int diagonal1 = (lf.getCurrentPosition() + rb.getCurrentPosition()) / 2;
+        int diagonal2 = (rf.getCurrentPosition() + lb.getCurrentPosition()) / 2;
+
+        return (diagonal1 - diagonal2) / 2;
+    }
+
+    /* -Y is forwards; +Y is backwards */
+    public int encoderAverageY() {
+        return (encoderAverageLeft() + encoderAverageRight());
     }
 }

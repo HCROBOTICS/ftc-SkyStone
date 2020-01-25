@@ -15,7 +15,7 @@ public class CameronRobot extends PushBot {
     public CameronRobot(HardwareMap hw) {
         super(hw);
 
-        arm = new CameronArm(hw);
+        //arm = new CameronArm(hw);
         s0 = hw.servo.get("S0");
         s1 = hw.servo.get("S1");
     }
@@ -29,8 +29,6 @@ public class CameronRobot extends PushBot {
         wheels.rf.setDirection(DcMotorSimple.Direction.FORWARD);
         wheels.lb.setDirection(DcMotorSimple.Direction.REVERSE);
         wheels.rb.setDirection(DcMotorSimple.Direction.FORWARD);
-
-
     }
 
     @Override public void go(Gamepad gamepad1, Gamepad gamepad2) {

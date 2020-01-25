@@ -12,51 +12,27 @@ public class Odometer {
     private Position position;
 
     private final double GO_SPEED_BOUND = 3;
-    private int progress = 0;
-    private double speed = 0;
 
     public Odometer(Wheels wheels, Position position) {
         this.wheels = wheels;
         this.position = position;
     }
 
-    /* positive is forwards and negative is backwards. */
-    public double getDistanceForward() {
-        double r = (wheels.encoderAverageLeft() + wheels.encoderAverageRight()) / 2;
-        r /= wheels.ticksPerInch();
-
-        return r;
+    /* -X is left; +X is right */
+    public double getDistanceX() {
+        return wheels.encoderAverageX() / wheels.ticksPerInch();
     }
 
-    /* positive is right and negative is left. */
-    public double getDistanceRight() {
-        double r = (wheels.encoderAverageFront() + wheels.encoderAverageBack()) / 2;
-        r /= wheels.ticksPerInch();
-
-        return r;
+    /* -Y is forwards; +Y is backwards */
+    public double getDistanceY() {
+        return wheels.encoderAverageY() / wheels.ticksPerInch();
     }
 
-    /*// goDistanceForward() is iterative. It returns true until it reaches its target.
-    public boolean goDistanceForward(double inches) {
-        wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        
-        int targetTicks = (int)(wheels.ticksPerInch() * inches);
-        int currentTicks = (wheels.encoderAverageLeft() + wheels.encoderAverageRight()) / 2;
-        int distanceFromTarget = targetTicks - currentTicks;
+    public void goY(double inches) {
+        double toGo = getDistanceY() - inches;
+    }
 
-        // Yeah, this will need some improvement.
-        double speed_down = distanceFromTarget / GO_SPEED_BOUND; // as it slows down near the target
-        double speed_up  = -currentTicks       / GO_SPEED_BOUND; // as it speeds up from the start
-        double speed = min(speed_down, speed_up);
-        if (speed > 1) speed = 1;
-        wheels.go(new ControllerCommand(0, (float) -speed, 0, 0));
-
-        if (distanceFromTarget < 100)
-            return false;
-        else
-            return true;
-    } */
-
+    /* This stuff will be used later. */
     public Position getPosition() {
         return position;
     }
