@@ -18,7 +18,21 @@ public class JohnLeftFarside extends JohnAuto {
         while (opModeIsActive()) {
             initGrab();
 
-            robot.wheels.encoderReset();
+            forward(INITIAL_FORWARD);
+            sleep(500);
+            turnRight(TURN);
+            sleep(500);
+            driveToLine();
+            break;
+        }
+
+        robot.stop();
+
+    }
+}
+
+
+/*
             while (opModeIsActive()) {
                 double current = -robot.odometer.getDistanceY();
                 if (Math.abs(current) < .2) current = 0;
@@ -37,15 +51,4 @@ public class JohnLeftFarside extends JohnAuto {
                 telemetry.update();
                 robot.wheels.go(gamepad1);
             }
-
-            sleep(500);
-            turnRight(TURN);
-            sleep(500);
-            driveToLine();
-            break;
-        }
-
-        robot.stop();
-
-    }
-}
+            */

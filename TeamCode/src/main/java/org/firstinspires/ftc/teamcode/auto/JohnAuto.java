@@ -105,9 +105,10 @@ public class JohnAuto extends Auto {
         //raise rotate
     }
     void release_skystone() {
+        //lower rotate
         robot.rGrab.setPosition(.45);
         robot.lGrab.setPosition(.5);
-        //raise rotate?
+        //raise rotate
     }
 
     void resetRotate() {

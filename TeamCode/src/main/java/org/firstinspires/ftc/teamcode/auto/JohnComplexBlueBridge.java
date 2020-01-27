@@ -3,8 +3,11 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
+@Disabled
 @Autonomous (name = "John Complex Blue Bridge")
 public class JohnComplexBlueBridge extends JohnAuto {
 

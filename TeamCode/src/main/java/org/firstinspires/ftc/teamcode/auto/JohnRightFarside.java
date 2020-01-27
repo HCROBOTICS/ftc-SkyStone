@@ -6,23 +6,19 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 @Autonomous (name = "John Start Right Farside")
 public class JohnRightFarside extends JohnAuto {
 
-    @Override public void runOpMode() {
+    @Override public void runOpMode() throws  InterruptedException{
         robot = new JohnRobot(hardwareMap);
         robot.init();
         wheelsInit();
 
         waitForStart();
 
-        while (opModeIsActive()) {
-            initGrab();
-
-            forward(INITIAL_FORWARD);
-            sleep(500);
-            turnLeft(TURN);
-            sleep(500);
-            driveToLine();
-            break;
-        }
+        initGrab();
+        forward(INITIAL_FORWARD);
+        sleep(500);
+        turnLeft(TURN);
+        sleep(500);
+        driveToLine();
 
         robot.stop();
 

@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -15,14 +14,13 @@ public class JohnRobot extends PushBot {
     public DcMotor wrist;
     public Servo lGrab;
     public Servo rGrab;
-    public CRServo color;
+    public Servo color;
+    public Servo drag;
 
     public ColorSensor color_sensor_down;
     public ColorSensor color_sensor_side;
 
-    public static final double WRIST_SPEED = .005;
     public static final double LINE_LUMINOSITY = 1050;
-
 
     public JohnRobot(HardwareMap hw) {
         super(hw);
@@ -33,8 +31,8 @@ public class JohnRobot extends PushBot {
         lGrab = hw.servo.get("lGrab");
         rGrab = hw.servo.get("rGrab");
         wrist = hw.dcMotor.get("wrist");
-        color = hw.crservo.get("color");
-
+        color = hw.servo.get("color");
+        drag = hw.servo.get("drag");
     }
 
     @Override public void init() {
