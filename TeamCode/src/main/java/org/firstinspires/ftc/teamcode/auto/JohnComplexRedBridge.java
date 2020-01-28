@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
 @Disabled
-@Autonomous (name = "John Complex Red Bridge")
+@Autonomous (name = "John Complex Red Bridge", group = "John")
 public class JohnComplexRedBridge extends JohnAuto{
 
     @Override

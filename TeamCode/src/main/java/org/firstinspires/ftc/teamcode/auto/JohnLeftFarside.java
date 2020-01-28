@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
 import static java.lang.Math.min;
 
-@Autonomous (name = "John Start Left Farside")
+@Autonomous (name = "John Start Left Farside", group = "John")
 public class JohnLeftFarside extends JohnAuto {
 
     @Override public void runOpMode() {

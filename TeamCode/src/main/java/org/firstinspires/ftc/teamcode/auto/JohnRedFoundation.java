@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
-@Autonomous (name = "John Blue Foundation", group = "John")
-public class JohnBlueFoundation extends JohnAuto {
+@Autonomous(name = "John Red Foundation", group = "John")
+public class JohnRedFoundation extends JohnAuto{
 
     DigitalChannel digitalTouch;
 
@@ -21,16 +21,16 @@ public class JohnBlueFoundation extends JohnAuto {
 
         forward(250);
         sleep(SLEEP_TIME);
-        turnLeft(TURN);
+        turnRight(TURN);
         sleep(SLEEP_TIME);
         driveToLine();
         sleep(SLEEP_TIME / 2);
         backward(250);
         sleep(SLEEP_TIME);
-        turnRight(TURN);
+        turnLeft(TURN);
         sleep(SLEEP_TIME);
 
-        while (digitalTouch.getState() == true /* true = not pressed */ ) {
+        while(digitalTouch.getState() == true /* true = not pressed */ ) {
             robot.wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
         }
 
@@ -40,7 +40,7 @@ public class JohnBlueFoundation extends JohnAuto {
         robot.drag.setPosition(1);
 
         sleep(SLEEP_TIME / 2);
-        turnLeft(TURN);
+        turnRight(TURN);
         sleep(SLEEP_TIME);
         driveToLineReverse();
     }
