@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,9 +28,21 @@ public class CameronRobot extends PushBot {
         wheels.rf.setDirection(DcMotorSimple.Direction.FORWARD);
         wheels.lb.setDirection(DcMotorSimple.Direction.REVERSE);
         wheels.rb.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        servosUp();
     }
 
     @Override public void go(Gamepad gamepad1, Gamepad gamepad2) {
         wheels.go(gamepad1);
+    }
+
+    public void servosDown() {
+        s0.setPosition(0);
+        s1.setPosition(1);
+    }
+
+    public void servosUp() {
+        s0.setPosition(1);
+        s1.setPosition(0);
     }
 }

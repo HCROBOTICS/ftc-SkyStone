@@ -12,7 +12,7 @@ public class ControllerCommand extends Gamepad {
      */
 
     public enum Command {
-        FORWARD, BACKWARD, TURN_LEFT, TURN_RIGHT, STRAFE_LEFT, STRAFE_RIGHT, BLANK,
+        FORWARD, BACKWARD, HALF_BACKWARD, TURN_LEFT, TURN_RIGHT, STRAFE_LEFT, STRAFE_RIGHT, BLANK,
     }
 
     public ControllerCommand(Command cmd) {
@@ -22,6 +22,9 @@ public class ControllerCommand extends Gamepad {
                 break;
             case BACKWARD:
                 left_stick_y = 1;
+                break;
+            case HALF_BACKWARD:
+                left_stick_y = 0.5f;
                 break;
             case TURN_LEFT:
                 right_stick_x = -1;

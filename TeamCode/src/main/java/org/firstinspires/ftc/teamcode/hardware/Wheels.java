@@ -29,6 +29,10 @@ public class Wheels {
         }
     }
 
+    public enum Direction {
+
+    }
+
     public Wheel wheel;
     public Motor motor;
 

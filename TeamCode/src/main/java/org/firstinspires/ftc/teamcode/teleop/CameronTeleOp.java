@@ -17,13 +17,10 @@ public class CameronTeleOp extends OpMode {
         robot = new CameronRobot(hardwareMap);
         robot.init();
 
-        odometer = new Odometer(robot.wheels, new Position());
+        odometer = new Odometer(robot.wheels);
 
         telemetry.addData("Robot", "Ready");
         telemetry.update();
-
-        robot.s0.setPosition(0.5);
-        robot.s1.setPosition(0.5);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class JohnTeleOp extends OpMode {
         robot = new JohnRobot(hardwareMap);
         robot.init();
 
-        odometer = new Odometer(robot.wheels, new Position());
+        odometer = new Odometer(robot.wheels);
         robot.wheels.encoderReset();
 
         // Compensate for the fact that the motors all face a different direction.
@@ -50,7 +50,7 @@ public class JohnTeleOp extends OpMode {
         } */
 
         telemetry.addData("Down Alpha", robot.color_sensor_down.alpha());
-        telemetry.addData("Side Alpha", robot.color_sensor_side.alpha());
+        //telemetry.addData("Side Alpha", robot.color_sensor_side.alpha());
 
         telemetry.addData("X Distance", odometer.getDistanceX());
         telemetry.addData("Y Distance", odometer.getDistanceY());
@@ -69,5 +69,9 @@ public class JohnTeleOp extends OpMode {
             robot.rGrab.setPosition(.25);
         }
 
+        if (gamepad1.a)
+            robot.drag.setPosition(0);
+        else if (gamepad1.x)
+            robot.drag.setPosition(1);
     }
 }

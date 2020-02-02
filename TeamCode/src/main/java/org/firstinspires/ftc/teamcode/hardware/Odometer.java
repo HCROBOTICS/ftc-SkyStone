@@ -8,17 +8,16 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.auto.ControllerCommand;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 public class Odometer {
     private Wheels wheels;
-    private Position position;
 
     private final double GO_SPEED_BOUND = 3;
 
-    public Odometer(Wheels wheels, Position position) {
+    public Odometer(Wheels wheels) {
         this.wheels = wheels;
-        this.position = position;
     }
 
     /* -X is left; +X is right */
@@ -31,12 +30,25 @@ public class Odometer {
         return wheels.encoderAverageY() / wheels.ticksPerInch();
     }
 
-    /* This stuff will be used later. */
-    public Position getPosition() {
-        return position;
+    public double goDistanceY(double target) {
+        double distance = target - getDistanceY();
+
+        return speed(distance, wheels.encoderAverageY());
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    /*
+     * Given a target position and current progress, calculate the appropriate speed for the motors.
+     * To avoid slipping, which causes the encoders (and thus the odometer) to lose accuracy, the
+     * motors accelerate into their final
+     */
+    private double speed(double target, double progress, double bound) {
+        return 0;
+    }
+
+    /* This is so I don't have to constantly type GO_SPEED_BOUND, and I wanted to see if
+     * polymorphism worked here.
+     */
+    private double speed(double target, double progress) {
+        return speed(target, progress,  GO_SPEED_BOUND);
     }
 }

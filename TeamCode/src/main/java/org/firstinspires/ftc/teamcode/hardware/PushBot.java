@@ -14,7 +14,7 @@ public class PushBot {
     public PushBot(HardwareMap hw) {
         this.hw = hw;
         wheels = new Wheels(hw);
-        odometer = new Odometer(wheels, new Position());
+        odometer = new Odometer(wheels);
     }
 
     public void init() {

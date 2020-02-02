@@ -43,7 +43,7 @@ public abstract class CameronAuto extends LinearOpMode {
         vuforia = new Vuforia(hardwareMap);
         vuforia.init();
 
-        odometer = new Odometer(robot.wheels, new Position());
+        odometer = new Odometer(robot.wheels);
 
         waitForStart();
 
