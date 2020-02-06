@@ -30,7 +30,8 @@ public class Wheels {
     }
 
     public enum Direction {
-
+        FORWARDS, RIGHT, DIAGONAL_RIGHT, DIAGONAL_LEFT,
+        CORNER_RIGHT, CORNER_LEFT, ROTATE_RIGHT, TURN_BACK, TURN_FORWARD;
     }
 
     public Wheel wheel;
@@ -79,11 +80,59 @@ public class Wheels {
     }
 
     public void go(Gamepad gamepad) {
-        /* This is evil. Don't change it without understanding it first. */
+        /* This is evil. */
         lf.setPower(-gamepad.left_stick_y + gamepad.right_stick_x - gamepad.left_stick_x);
         rf.setPower(-gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
         lb.setPower(-gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
         rb.setPower(-gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
+    }
+
+    public void go(Direction direction, double power) {
+        switch (direction) {
+            case FORWARDS:
+                lf.setPower(power);
+                rf.setPower(power);
+                lb.setPower(power);
+                rb.setPower(power);
+                break;
+            case RIGHT:
+                lf.setPower(power);
+                rf.setPower(-power);
+                lb.setPower(-power);
+                rb.setPower(power);
+                break;
+            case DIAGONAL_LEFT:
+                lf.setPower(0);
+                rf.setPower(power);
+                lb.setPower(power);
+                rb.setPower(0);
+                break;
+            case DIAGONAL_RIGHT:
+                lf.setPower(power);
+                rf.setPower(0);
+                lb.setPower(0);
+                rb.setPower(power);
+                break;
+            case CORNER_LEFT:
+                lf.setPower(0);
+                rf.setPower(power);
+                lb.setPower(0);
+                rb.setPower(power);
+                break;
+            case CORNER_RIGHT:
+                lf.setPower(power);
+                rf.setPower(0);
+                lb.setPower(power);
+                rb.setPower(0);
+                break;
+            case ROTATE_RIGHT:
+                lf.setPower(power);
+                rf.setPower(-power);
+                lb.setPower(power);
+                rb.setPower(-power);
+                break;
+            default: break;
+        }
     }
 
     public void encoderReset() {
