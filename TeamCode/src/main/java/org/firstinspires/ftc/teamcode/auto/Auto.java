@@ -33,13 +33,6 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
     protected Vuforia vuforia;
 
     @Override public void runOpMode() throws InterruptedException{
-        /*
-         * This can be used as a reference for how to use Vuforia.
-         */
-        /*
-         * No it can't
-         */
-
         robot = new PushBot(hardwareMap);
         robot.init();
 

@@ -5,6 +5,8 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
+import org.firstinspires.ftc.teamcode.hardware.Wheels;
+
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 public class JohnAuto extends Auto {
@@ -72,7 +74,18 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(FORWARD));
 
         /* Wait until the color sensor sees a line. */
-        while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY) {
+        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 300) {
+            if (!opModeIsActive()) break;
+        }
+
+        robot.wheels.stop();
+    }
+
+    void driveToLine(double power) {
+        robot.wheels.go(Wheels.Direction.FORWARDS, power);
+
+        /* Wait until the color sensor sees a line. */
+        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 300) {
             if (!opModeIsActive()) break;
         }
 
@@ -83,7 +96,7 @@ public class JohnAuto extends Auto {
         robot.wheels.go(new ControllerCommand(BACKWARD));
 
         /* Wait until the color sensor sees a line. */
-        while (robot.color_sensor_down.alpha() < JohnRobot.LINE_LUMINOSITY) {
+        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 500) {
             if (!opModeIsActive()) break;
         }
 

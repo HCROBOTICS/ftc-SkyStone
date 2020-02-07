@@ -49,7 +49,7 @@ public class JohnTeleOp extends OpMode {
             robot.rotate.setPower((gamepad2.left_stick_y) / 5);
         } */
 
-        telemetry.addData("Down Alpha", robot.color_sensor_down.alpha());
+        telemetry.addData("Red-Blue Difference", robot.color_sensor_down.red() - robot.color_sensor_down.blue());
         //telemetry.addData("Side Alpha", robot.color_sensor_side.alpha());
 
         telemetry.addData("X Distance", odometer.getDistanceX());

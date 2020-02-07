@@ -1,17 +1,18 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
+import org.firstinspires.ftc.teamcode.hardware.Wheels;
+
+import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.FORWARD;
 
 @Autonomous (name = "John Blue Foundation", group = "John")
 public class JohnBlueFoundation extends JohnAuto {
 
-    DigitalChannel digitalTouch;
+    public static final int MODIFIER = 10;
 
     @Override
     public void runOpMode() throws InterruptedException {
-
         robot = new JohnRobot(hardwareMap);
         robot.init();
         wheelsInit();
@@ -19,29 +20,16 @@ public class JohnBlueFoundation extends JohnAuto {
 
         waitForStart();
 
-        forward(250);
-        sleep(SLEEP_TIME);
-        turnLeft(TURN);
-        sleep(SLEEP_TIME);
-        driveToLine();
-        sleep(SLEEP_TIME / 2);
-        backward(250);
-        sleep(SLEEP_TIME);
-        turnRight(TURN);
-        sleep(SLEEP_TIME);
+        driveToLine(0.1);
 
-        while (digitalTouch.getState() == true /* true = not pressed */ ) {
-            robot.wheels.go(new ControllerCommand(ControllerCommand.Command.FORWARD));
-        }
+        sleep(SLEEP_TIME * MODIFIER);
+        backward(500);
 
-        robot.drag.setPosition(0);
-        sleep(SLEEP_TIME / 2);
-        backward(3000);
-        robot.drag.setPosition(1);
+        sleep(SLEEP_TIME * MODIFIER);
+        turnRight(TURN + 300);
 
-        sleep(SLEEP_TIME / 2);
-        turnLeft(TURN);
-        sleep(SLEEP_TIME);
-        driveToLineReverse();
+        sleep(SLEEP_TIME * MODIFIER);
+
+
     }
 }
