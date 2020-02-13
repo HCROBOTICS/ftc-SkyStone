@@ -1,17 +1,12 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
-
-import static java.lang.Math.min;
 
 @Autonomous (name = "3. John Start Left Farside", group = "John")
 public class JohnLeftFarside extends JohnAuto {
 
     @Override public void runOpMode() {
-        robot = new JohnRobot(hardwareMap);
-        robot.init();
-        wheelsInit();
+        initJohn();
 
         waitForStart();
 
