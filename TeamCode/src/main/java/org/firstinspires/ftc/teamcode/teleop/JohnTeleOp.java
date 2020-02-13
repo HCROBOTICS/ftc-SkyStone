@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
-import org.firstinspires.ftc.teamcode.hardware.Odometer;
 
 @TeleOp(name = "John TeleOp", group = "John")
 public class JohnTeleOp extends OpMode {

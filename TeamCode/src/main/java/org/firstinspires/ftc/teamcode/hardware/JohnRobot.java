@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class JohnRobot extends PushBot {
     public JohnLift lift;
@@ -28,6 +28,7 @@ public class JohnRobot extends PushBot {
         rGrab = hw.servo.get("rGrab");
         wrist = hw.dcMotor.get("wrist");
         drag = hw.servo.get("drag");
+
     }
 
     @Override public void init() {
