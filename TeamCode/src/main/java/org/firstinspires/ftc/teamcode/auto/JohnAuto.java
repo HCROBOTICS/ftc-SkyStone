@@ -1,12 +1,8 @@
-// this class will not be used in matches, only as an inherited class
-// it's just gonna turn into variables and methods
-
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.Wheels;
-
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 public class JohnAuto extends Auto {
@@ -17,13 +13,8 @@ public class JohnAuto extends Auto {
     // how far we go to align ourselves with the blocks
     public static final int INITIAL_FORWARD = 3500;
 
-    /* sensor value to determine if block is skystone:
-      OFFICIAL FIRST RED:  (237,  28,  36)
-      OFFICIAL FIRST BLUE: (  0, 101, 179)
-      OFFICIAL FIRST GRAY: (153, 153, 154)
-      https://www.firstinspires.org/sites/default/files/uploads/resource_library/first-brand-guidelines-web-2015.pdf
-    */
-    public static final int RED_SENSOR_VALUE = 125;
+    public static final int DRAG_DOWN = 1;
+    public static final int DRAG_UP = 0;
 
     // how long we sleep
     public static final int SLEEP_TIME = 100;
@@ -70,22 +61,40 @@ public class JohnAuto extends Auto {
         robot.wheels.stop();
     }
 
-    void driveToLine() {
-        robot.wheels.go(new ControllerCommand(FORWARD));
+    void JohnStrafe (int ticks, double power) {
+        robot.wheels.rf.setPower(-0.5);
+        robot.wheels.lf.setPower(-0.5);
+        robot.wheels.lb.setPower(power);
+        robot.wheels.rb.setPower(-power);
 
-        /* Wait until the color sensor sees a line. */
-        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 300) {
+        robot.wheels.encoderReset();
+
+        while (robot.wheels.encoderAverageJohn() < ticks) {
             if (!opModeIsActive()) break;
         }
 
         robot.wheels.stop();
     }
 
-    void driveToLine(double power) {
-        robot.wheels.go(Wheels.Direction.FORWARDS, power);
+    void driveToLine() {
+        robot.wheels.go(new ControllerCommand(FORWARD));
 
         /* Wait until the color sensor sees a line. */
-        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 300) {
+        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 250) {
+            if (!opModeIsActive()) break;
+        }
+
+        robot.wheels.stop();
+    }
+
+    void driveToLineStrafe(double power) {
+        robot.wheels.rf.setPower(-0.5);
+        robot.wheels.lf.setPower(-0.5);
+        robot.wheels.lb.setPower(power);
+        robot.wheels.rb.setPower(-power);
+
+        /* Wait until the color sensor sees a line. */
+        while (Math.abs(robot.color_sensor_down.blue() - robot.color_sensor_down.red()) < 250) {
             if (!opModeIsActive()) break;
         }
 

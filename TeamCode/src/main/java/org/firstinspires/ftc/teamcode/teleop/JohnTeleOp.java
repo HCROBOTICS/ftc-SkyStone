@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.teamcode.auto.JohnAuto;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import org.firstinspires.ftc.teamcode.hardware.Odometer;
 
@@ -36,30 +37,14 @@ public class JohnTeleOp extends OpMode {
         telemetry.update();
     }
 
-
+    // This is designed to loop as fast as possible to avoid bad latency.
+    // Please don't add anything that isn't necessary. Thanks
     @Override
     public void loop() {
         robot.go(gamepad1, gamepad2);
         robot.lift.go(-gamepad2.left_stick_y);
         robot.rotate.setPower(-gamepad2.right_stick_y / 2);
         robot.wrist.setPower((gamepad2.right_trigger - gamepad2.left_trigger) / 2);
-
-        //// counter-rotate rotate to compensate for angle changes if lift is the only thing moving
-        /* if (gamepad2.left_stick_y != 0 && gamepad2.right_stick_y == 0) {
-            robot.rotate.setPower((gamepad2.left_stick_y) / 5);
-        } */
-
-        telemetry.addData("Red-Blue Difference", robot.color_sensor_down.red() - robot.color_sensor_down.blue());
-        //telemetry.addData("Side Alpha", robot.color_sensor_side.alpha());
-
-        telemetry.addData("X Distance", odometer.getDistanceX());
-        telemetry.addData("Y Distance", odometer.getDistanceY());
-
-        if (gamepad1.b) {
-            robot.wheels.encoderReset();
-            telemetry.addData("Encoders", "Reset");
-        } else
-            telemetry.addData("Left Encoder Average", robot.wheels.encoderAverageJohn());
 
         if (gamepad2.left_bumper /* close */ ) {
             robot.lGrab.setPosition(.15);
@@ -69,9 +54,10 @@ public class JohnTeleOp extends OpMode {
             robot.rGrab.setPosition(.25);
         }
 
-        if (gamepad1.a)
-            robot.drag.setPosition(0);
-        else if (gamepad1.x)
+        if (gamepad1.a) {
             robot.drag.setPosition(1);
+        } else if (gamepad1.x) {
+            robot.drag.setPosition(0);
+        }
     }
 }

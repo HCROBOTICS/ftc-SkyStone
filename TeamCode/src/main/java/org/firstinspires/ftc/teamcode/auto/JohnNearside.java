@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 
-@Autonomous (name = "John Drive to Line", group = "John")
+@Autonomous (name = "1. John Drive to Line", group = "John")
 public class JohnNearside extends JohnAuto {
 
     @Override

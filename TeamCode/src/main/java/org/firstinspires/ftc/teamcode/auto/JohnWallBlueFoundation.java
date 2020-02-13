@@ -6,8 +6,8 @@ import org.firstinspires.ftc.teamcode.hardware.Wheels;
 
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.FORWARD;
 
-@Autonomous (name = "John Blue Foundation", group = "John")
-public class JohnBlueFoundation extends JohnAuto {
+@Autonomous (name = "4. John Wall Blue Foundation", group = "John")
+public class JohnWallBlueFoundation extends JohnAuto {
 
     public static final int MODIFIER = 10;
 
@@ -20,16 +20,39 @@ public class JohnBlueFoundation extends JohnAuto {
 
         waitForStart();
 
-        driveToLine(0.1);
+        turnRight(100);
+        sleep(SLEEP_TIME * MODIFIER);
+        forward(250);
+        sleep(SLEEP_TIME * MODIFIER);
+        turnLeft(100);
+        sleep(SLEEP_TIME * MODIFIER);
+
+        driveToLine();
 
         sleep(SLEEP_TIME * MODIFIER);
         backward(500);
 
         sleep(SLEEP_TIME * MODIFIER);
-        turnRight(TURN + 300);
+        turnRight(TURN + 500);
 
         sleep(SLEEP_TIME * MODIFIER);
 
+        forward(4500);
+        sleep(SLEEP_TIME);
 
+        robot.drag.setPosition(DRAG_DOWN);
+        sleep(SLEEP_TIME * MODIFIER);
+
+        backward(5000);
+        sleep(SLEEP_TIME);
+
+        robot.drag.setPosition(DRAG_UP);
+        sleep(SLEEP_TIME * MODIFIER);
+
+        driveToLineStrafe(1);
     }
 }
+
+
+
+
