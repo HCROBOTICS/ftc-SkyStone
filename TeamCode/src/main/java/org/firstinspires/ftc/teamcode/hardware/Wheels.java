@@ -189,6 +189,6 @@ public class Wheels {
 
     /* -Y is forwards; +Y is backwards */
     public int encoderAverageY() {
-        return (encoderAverageLeft() + encoderAverageRight());
+        return (encoderAverageLeft() + encoderAverageRight()) / 2;
     }
 }

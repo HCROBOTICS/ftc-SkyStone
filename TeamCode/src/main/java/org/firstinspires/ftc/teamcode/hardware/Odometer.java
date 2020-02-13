@@ -13,11 +13,13 @@ import static java.lang.Math.min;
 
 public class Odometer {
     private Wheels wheels;
+    private Telemetry telemetry;
 
-    private final double GO_SPEED_BOUND = 3;
+    private final double GO_SPEED_BOUND = 6;
 
-    public Odometer(Wheels wheels) {
+    public Odometer(Wheels wheels, Telemetry telemetry) {
         this.wheels = wheels;
+        this.telemetry = telemetry;
     }
 
     /* -X is left; +X is right */
@@ -30,13 +32,19 @@ public class Odometer {
         return wheels.encoderAverageY() / wheels.ticksPerInch();
     }
 
-    public double goTargetY(double target) {
-        double distance = target - getDistanceY();
-        double speed = speed(distance, getDistanceY());
-        Wheels.Direction direction;
-        if (distance < 0) direction = Wheels.Direction.FORWARDS;
+    public void goTargetY(double target) {
+        wheels.encoderReset();
+        double distance, speed;
+        while (true) {
+            distance = target - getDistanceY();
+            telemetry.addData("Distance", distance);
+            speed = speed(abs(distance), abs(getDistanceY()));
+            speed /= 2;
 
-        return speed(abs(distance), abs(wheels.encoderAverageY()));
+            if (speed == 0) break;
+            else wheels.go(Wheels.Direction.FORWARDS, distance > 0? speed : -speed);
+        }
+        wheels.stop();
     }
 
     /*
@@ -46,10 +54,18 @@ public class Odometer {
      */
     private double speed(double distance, double progress, double bound) {
         double accelerate = progress / bound, decelerate = distance / bound;
-        if (accelerate < .2) accelerate = .2; /* the motors will never move otherwise */
-        if (decelerate > .2) decelerate = 0; /* the motors will stop too late otherwise */
 
+        telemetry.addData("Accelerate", accelerate);
+        telemetry.addData("Decelerate", decelerate);
+
+        if (accelerate < .5) accelerate = .5; /* the motors will never move otherwise */
+        if (decelerate < .5) decelerate = 0;  /* the motors will stop too late otherwise */
         double power = min(accelerate, decelerate);
+
+        telemetry.addData("Power", power);
+        if (power > 1) power = 1;
+
+        telemetry.update();
         return power;
     }
 
