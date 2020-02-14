@@ -65,13 +65,6 @@ public class Wheels {
         rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        // Compensate for the fact that the motors all face a different direction.
-        // JOEY, CAN WE DELETE THIS? IT IS ALREADY IN JOHN AUTO AND CAMERON AUTO AND IT POTENTIALLY
-        // CAUSED THE ISSUES WITH MY AUTONOMOUS
-        lf.setDirection(DcMotor.Direction.REVERSE);
-        rf.setDirection(DcMotor.Direction.FORWARD);
-        lb.setDirection(DcMotor.Direction.REVERSE);
-        rb.setDirection(DcMotor.Direction.FORWARD);
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior mode) {
