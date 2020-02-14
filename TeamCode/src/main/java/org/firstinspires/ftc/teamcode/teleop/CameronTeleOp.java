@@ -27,26 +27,20 @@ public class CameronTeleOp extends OpMode {
     public void loop() {
         robot.go(gamepad1, gamepad2); // move the wheels
 
-        if (gamepad1.right_bumper) {
-            robot.s0.setPosition(0.05);
-            robot.s1.setPosition(0.95);
-        } else if (gamepad1.left_bumper) {
-            robot.s0.setPosition(0.6);
-            robot.s1.setPosition(0.4);
-        }
-
-        robot.arm.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+        if (gamepad1.right_bumper) robot.servosUp();
+        else if (gamepad1.left_bumper) robot.servosDown();
 
         telemetry.addData("X", odometer.getDistanceX());
         telemetry.addData("Y", odometer.getDistanceY());
         telemetry.addData("Turn", robot.wheels.encoderAverageJohn());
 
-        telemetry.addData("Blue", robot.color.blue());
-        telemetry.addData("Red", robot.color.red());
-
         if (gamepad1.b) {
             robot.wheels.encoderReset();
             telemetry.addData("Encoders", "reset");
         }
+
+        telemetry.addData("Blue", robot.color.blue());
+        telemetry.addData("Red", robot.color.red());
+        telemetry.addData("Difference", robot.color.blue() - robot.color.red());
     }
 }

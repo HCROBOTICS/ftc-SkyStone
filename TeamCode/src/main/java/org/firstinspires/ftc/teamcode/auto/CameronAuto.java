@@ -61,17 +61,14 @@ public class CameronAuto extends LinearOpMode {
         backward(2);
         sleep(PAUSE);
 
-        //driveToLine(new ControllerCommand(ControllerCommand.Command.LEFT_SLOW));
-        //sleep(PAUSE);
-
         turnRight(TURN);
         sleep(PAUSE);
 
         // Go to the foundation.
-        backward(36);
+        backward(32);
         sleep(PAUSE);
 
-        turnLeft(2500);
+        turnLeft(2700);
         sleep(PAUSE);
 
         backward(28);
@@ -90,7 +87,7 @@ public class CameronAuto extends LinearOpMode {
         sleep(1000);
 
         // Drive under the bridge.
-        driveToLine(new ControllerCommand(ControllerCommand.Command.RIGHT_SLOW));
+        driveToLine(Wheels.Direction.RIGHT);
 
         robot.stop();
         //vuforia.stop();
@@ -101,7 +98,7 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.go(Wheels.Direction.FORWARDS, .25);
 
         while (Math.abs(odometer.getDistanceY()) < inches) {
-            if (!opModeIsActive()) break;
+            if (isStopRequested()) break;
         }
 
         robot.stop();
@@ -112,7 +109,7 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.go(Wheels.Direction.FORWARDS, -.25);
 
         while (Math.abs(odometer.getDistanceY()) < inches) {
-            if (!opModeIsActive()) break;
+            if (isStopRequested()) break;
         }
 
         robot.wheels.stop();
@@ -123,7 +120,7 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.go(new ControllerCommand(STRAFE_LEFT));
 
         while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
-            if (!opModeIsActive()) break;
+            if (isStopRequested()) break;
         }
 
         robot.wheels.stop();
@@ -134,7 +131,7 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.go(new ControllerCommand(STRAFE_RIGHT));
 
         while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
-            if (!opModeIsActive()) break;
+            if (isStopRequested()) break;
         }
 
         robot.wheels.stop();
@@ -144,7 +141,9 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.encoderReset();
         robot.wheels.go(new ControllerCommand(TURN_LEFT));
 
-        while (Math.abs(robot.wheels.encoderAverageJohn()) < ticks);
+        while (Math.abs(robot.wheels.encoderAverageJohn()) < ticks) {
+            if (isStopRequested()) break;
+        }
 
         robot.stop();
     }
@@ -153,16 +152,21 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.go(new ControllerCommand(TURN_RIGHT));
         robot.wheels.encoderReset();
 
-        while (robot.wheels.encoderAverageJohn() < ticks); // do nothing
+        while (robot.wheels.encoderAverageJohn() < ticks) {
+            if (isStopRequested()) break;
+        }
 
         robot.stop();
     }
 
-    void driveToLine(ControllerCommand control) {
-        robot.wheels.go(control);
+    void driveToLine(Wheels.Direction direction) {
+        robot.wheels.encoderReset();
+        robot.wheels.go(direction, .5);
 
         /* Wait until the color sensor sees a line. */
-        while (Math.abs(robot.color.blue() - robot.color.red()) < 250);
+        while (Math.abs(robot.color.blue() - robot.color.red()) < 150) {
+            if (isStopRequested()) break;
+        }
 
         robot.wheels.stop();
     }
