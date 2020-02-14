@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
@@ -115,29 +114,20 @@ public class JohnAuto extends Auto {
         robot.wheels.stop();
     }
 
-    void wheelsInit() {
-        // Compensate for the fact that the motors all face a different direction.
-        robot.wheels.lf.setDirection(DcMotor.Direction.REVERSE);
-        robot.wheels.rf.setDirection(DcMotor.Direction.FORWARD);
-        robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
-        robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
-    }
-
-    void resetRotate() {
-        robot.rotate.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rotate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
     void initGrab() {
         robot.lGrab.setPosition(1);
         robot.rGrab.setPosition(0);
     }
 
+    void initDrag() {
+        robot.drag.setPosition(DRAG_UP);
+    }
+
     void initJohn() {
         robot = new JohnRobot(hardwareMap);
         robot.init();
-        wheelsInit();
-        resetRotate();
+        initGrab();
+        initDrag();
     }
 }
 

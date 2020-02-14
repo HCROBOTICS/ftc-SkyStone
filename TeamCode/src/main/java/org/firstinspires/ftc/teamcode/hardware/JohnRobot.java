@@ -36,10 +36,10 @@ public class JohnRobot extends PushBot {
     @Override public void init() {
         super.init();
 
-        wheels.lf.setDirection(DcMotorSimple.Direction.FORWARD);
-        wheels.rf.setDirection(DcMotorSimple.Direction.FORWARD);
-        wheels.lb.setDirection(DcMotorSimple.Direction.FORWARD);
-        wheels.rb.setDirection(DcMotorSimple.Direction.FORWARD);
+        wheels.lf.setDirection(DcMotor.Direction.REVERSE);
+        wheels.rf.setDirection(DcMotor.Direction.FORWARD);
+        wheels.lb.setDirection(DcMotor.Direction.REVERSE);
+        wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
         wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

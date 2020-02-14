@@ -10,14 +10,11 @@ public class JohnRightFarside extends JohnAuto {
 
         waitForStart();
 
-        initGrab();
         forward(INITIAL_FORWARD);
         sleep(500);
         turnLeft(TURN);
         sleep(500);
         driveToLine();
-
-        robot.stop();
 
     }
 }
