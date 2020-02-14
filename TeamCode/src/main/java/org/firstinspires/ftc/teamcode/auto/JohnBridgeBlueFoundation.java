@@ -11,13 +11,6 @@ public class JohnBridgeBlueFoundation extends JohnAuto {
 
         waitForStart();
 
-        turnRight(100);
-        sleep(SLEEP_TIME);
-        forward(250);
-        sleep(SLEEP_TIME);
-        turnLeft(100);
-        sleep(SLEEP_TIME);
-
         driveToLine();
 
         sleep(SLEEP_TIME);
@@ -40,10 +33,10 @@ public class JohnBridgeBlueFoundation extends JohnAuto {
         robot.drag.setPosition(DRAG_UP);
         sleep(SLEEP_TIME);
 
-        JohnStrafe(2000, 1);
+        JohnStrafe(5500, 1);
         sleep(SLEEP_TIME);
 
-        forward(INITIAL_FORWARD);
+        forward(3500);
         sleep(SLEEP_TIME);
 
         turnRight(TURN);
@@ -52,7 +45,3 @@ public class JohnBridgeBlueFoundation extends JohnAuto {
         driveToLine();
     }
 }
-
-
-
-

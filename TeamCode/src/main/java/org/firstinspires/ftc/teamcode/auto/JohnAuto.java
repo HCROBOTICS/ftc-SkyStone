@@ -65,14 +65,14 @@ public class JohnAuto extends Auto {
     }
 
     void JohnStrafe (int ticks, double power) {
+        robot.wheels.encoderReset();
+
         robot.wheels.rf.setPower(-0.5);
         robot.wheels.lf.setPower(-0.5);
         robot.wheels.lb.setPower(power);
         robot.wheels.rb.setPower(-power);
 
-        robot.wheels.encoderReset();
-
-        while (robot.wheels.encoderAverageJohn() < ticks) {
+        while (robot.wheels.encoderAverageFront() < ticks) {
             if (!opModeIsActive()) break;
         }
 
