@@ -40,18 +40,17 @@ public class JohnTeleOp extends OpMode {
         robot.rotate.setPower(-gamepad2.right_stick_y / 2);
         robot.wrist.setPower((gamepad2.right_trigger - gamepad2.left_trigger) / 2);
 
-        if (gamepad2.left_bumper /* close */ ) {
+        if (gamepad2.left_bumper /* close */ )
             robot.lGrab.setPosition(.15);
             robot.rGrab.setPosition(.8);
-        } else if (gamepad2.right_bumper /* open */ ) {
+
+        if (gamepad2.right_bumper /* open */ )
             robot.lGrab.setPosition(.6);
             robot.rGrab.setPosition(.25);
-        }
 
-        if (gamepad1.a) {
+        if (gamepad1.a)
             robot.drag.setPosition(1);
-        } else if (gamepad1.x) {
+        else
             robot.drag.setPosition(0);
-        }
     }
 }

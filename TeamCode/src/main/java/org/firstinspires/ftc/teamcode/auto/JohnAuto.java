@@ -126,6 +126,7 @@ public class JohnAuto extends Auto {
     void initJohn() {
         robot = new JohnRobot(hardwareMap);
         robot.init();
+        robot.wheels.encoderReset();
         initGrab();
         initDrag();
     }
