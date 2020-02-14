@@ -10,8 +10,6 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 public class JohnTeleOp extends OpMode {
     JohnRobot robot;
 
-    public int i = 0;
-
     @Override
     public void init() {
         telemetry.addData("Robot", "Not Ready");
@@ -46,23 +44,18 @@ public class JohnTeleOp extends OpMode {
         robot.rotate.setPower(-gamepad2.right_stick_y / 2);
         robot.wrist.setPower((gamepad2.right_trigger - gamepad2.left_trigger) / 2);
 
-        if (gamepad2.left_bumper /* close */ )
+        if (gamepad2.left_bumper /* close */) {
             robot.lGrab.setPosition(.15);
             robot.rGrab.setPosition(.8);
-
-        if (gamepad2.right_bumper /* open */ )
+        } else if (gamepad2.right_bumper /* open */) {
             robot.lGrab.setPosition(.6);
             robot.rGrab.setPosition(.25);
+        }
 
-        if (gamepad1.a)
+        if (gamepad1.a && !gamepad1.start) {
             robot.drag.setPosition(1);
-
-        if (gamepad1.x)
+        } else if (gamepad1.x) {
             robot.drag.setPosition(0);
-
-        // this will be removed, it is to test loops per second
-        // i will use a slo mo camera to record loops and do some maths
-        telemetry.addData("", i);
-        i++;
+        }
     }
 }

@@ -11,13 +11,6 @@ public class JohnWallBlueFoundation extends JohnAuto {
 
         waitForStart();
 
-        turnRight(200);
-        sleep(SLEEP_TIME);
-        forward(500);
-        sleep(SLEEP_TIME);
-        turnLeft(200);
-        sleep(SLEEP_TIME);
-
         driveToLine();
 
         sleep(SLEEP_TIME);
