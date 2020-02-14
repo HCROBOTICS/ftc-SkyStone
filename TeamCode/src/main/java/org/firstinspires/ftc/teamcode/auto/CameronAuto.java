@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import org.firstinspires.ftc.teamcode.hardware.CameronRobot;
 import org.firstinspires.ftc.teamcode.hardware.Odometer;
 import org.firstinspires.ftc.teamcode.hardware.Vuforia;
+import org.firstinspires.ftc.teamcode.hardware.Wheels;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,15 +13,16 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 @Autonomous (name = "Cameron Auto")
-@Disabled
-public abstract class CameronAuto extends LinearOpMode {
+public class CameronAuto extends LinearOpMode {
     protected CameronRobot robot;
     protected Vuforia vuforia;
     protected Odometer odometer;
 
     ControllerCommand.Command direction;
+    public static final int TURN = 2700;
+    public static final int PAUSE = 500;
 
-    @Override public void runOpMode() {
+    @Override public void runOpMode() throws InterruptedException {
         robot = new CameronRobot(hardwareMap);
         robot.init();
 
@@ -29,15 +31,13 @@ public abstract class CameronAuto extends LinearOpMode {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
-        vuforia = new Vuforia(hardwareMap);
-        vuforia.init();
+        //vuforia = new Vuforia(hardwareMap);
+        //vuforia.init();
 
-        odometer = new Odometer(robot.wheels);
+        odometer = new Odometer(robot.wheels, telemetry);
 
         waitForStart();
-
-        vuforia.start();
-        go();
+        //vuforia.start();
 
         /* while (opModeIsActive()) {
             VuforiaTrackable look = vuforia.look();
@@ -58,67 +58,111 @@ public abstract class CameronAuto extends LinearOpMode {
             telemetry.update();
         } */
 
+        backward(2);
+        sleep(PAUSE);
+
+        //driveToLine(new ControllerCommand(ControllerCommand.Command.LEFT_SLOW));
+        //sleep(PAUSE);
+
+        turnRight(TURN);
+        sleep(PAUSE);
+
+        // Go to the foundation.
+        backward(36);
+        sleep(PAUSE);
+
+        turnLeft(2500);
+        sleep(PAUSE);
+
+        backward(28);
+        sleep(PAUSE);
+
+        // Grab the foundation (waiting long enough for the servos to go down).
+        robot.servosDown();
+        sleep(1000);
+
+        // Return to the corner.
+        forward(36);
+        sleep(PAUSE);
+
+        // Release the foundation.
+        robot.servosUp();
+        sleep(1000);
+
+        // Drive under the bridge.
+        driveToLine(new ControllerCommand(ControllerCommand.Command.RIGHT_SLOW));
+
         robot.stop();
-        vuforia.stop();
+        //vuforia.stop();
     }
 
-    abstract void go();
-
-    void forward(int ticks) {
+    void forward(double inches) {
         robot.wheels.encoderReset();
-        robot.wheels.go(new ControllerCommand(FORWARD));
+        robot.wheels.go(Wheels.Direction.FORWARDS, .25);
 
-        while (Math.abs(robot.wheels.encoderAverageY()) < ticks) {
+        while (Math.abs(odometer.getDistanceY()) < inches) {
             if (!opModeIsActive()) break;
         }
 
         robot.stop();
     }
 
-    void backward(int ticks) {
+    void backward(double inches) {
         robot.wheels.encoderReset();
+        robot.wheels.go(Wheels.Direction.FORWARDS, -.25);
 
-        while (Math.abs(robot.wheels.encoderAverageY()) < ticks) {
+        while (Math.abs(odometer.getDistanceY()) < inches) {
             if (!opModeIsActive()) break;
-
-            robot.wheels.go(new ControllerCommand(BACKWARD));
         }
 
         robot.wheels.stop();
     }
 
-    void left(int ticks) {
+    void left(double inches) {
+        robot.wheels.encoderReset();
         robot.wheels.go(new ControllerCommand(STRAFE_LEFT));
-        robot.wheels.encoderReset();
 
-        while (Math.abs(robot.wheels.encoderAverageX()) < ticks) {
+        while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
             if (!opModeIsActive()) break;
         }
 
         robot.wheels.stop();
     }
 
-    void right(int ticks) {
+    void right(double inches) {
         robot.wheels.encoderReset();
         robot.wheels.go(new ControllerCommand(STRAFE_RIGHT));
 
-        while (Math.abs(robot.wheels.encoderAverageX()) < ticks) {
+        while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
             if (!opModeIsActive()) break;
         }
 
         robot.wheels.stop();
+    }
+
+    void turnLeft(int ticks) {
+        robot.wheels.encoderReset();
+        robot.wheels.go(new ControllerCommand(TURN_LEFT));
+
+        while (Math.abs(robot.wheels.encoderAverageJohn()) < ticks);
+
+        robot.stop();
+    }
+
+    void turnRight (int ticks) {
+        robot.wheels.go(new ControllerCommand(TURN_RIGHT));
+        robot.wheels.encoderReset();
+
+        while (robot.wheels.encoderAverageJohn() < ticks); // do nothing
+
+        robot.stop();
     }
 
     void driveToLine(ControllerCommand control) {
         robot.wheels.go(control);
 
         /* Wait until the color sensor sees a line. */
-        while (robot.color.blue() < 150 && robot.color.red() < 150) {
-            if (!opModeIsActive()) break;
-            telemetry.addData("Red", robot.color.red());
-            telemetry.addData("Blue", robot.color.blue());
-            telemetry.update();
-        }
+        while (Math.abs(robot.color.blue() - robot.color.red()) < 250);
 
         robot.wheels.stop();
     }

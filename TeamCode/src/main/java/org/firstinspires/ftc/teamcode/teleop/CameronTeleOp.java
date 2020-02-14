@@ -17,7 +17,7 @@ public class CameronTeleOp extends OpMode {
         robot = new CameronRobot(hardwareMap);
         robot.init();
 
-        odometer = new Odometer(robot.wheels);
+        odometer = new Odometer(robot.wheels, telemetry);
 
         telemetry.addData("Robot", "Ready");
         telemetry.update();
@@ -35,9 +35,14 @@ public class CameronTeleOp extends OpMode {
             robot.s1.setPosition(0.4);
         }
 
+        robot.arm.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+
         telemetry.addData("X", odometer.getDistanceX());
         telemetry.addData("Y", odometer.getDistanceY());
         telemetry.addData("Turn", robot.wheels.encoderAverageJohn());
+
+        telemetry.addData("Blue", robot.color.blue());
+        telemetry.addData("Red", robot.color.red());
 
         if (gamepad1.b) {
             robot.wheels.encoderReset();
