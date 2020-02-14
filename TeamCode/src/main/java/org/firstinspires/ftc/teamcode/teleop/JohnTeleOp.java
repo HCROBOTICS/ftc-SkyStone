@@ -10,6 +10,8 @@ import org.firstinspires.ftc.teamcode.hardware.JohnRobot;
 public class JohnTeleOp extends OpMode {
     JohnRobot robot;
 
+    public int i = 0;
+
     @Override
     public void init() {
         telemetry.addData("Robot", "Not Ready");
@@ -54,7 +56,13 @@ public class JohnTeleOp extends OpMode {
 
         if (gamepad1.a)
             robot.drag.setPosition(1);
-        else
+
+        if (gamepad1.x)
             robot.drag.setPosition(0);
+
+        // this will be removed, it is to test loops per second
+        // i will use a slo mo camera to record loops and do some maths
+        telemetry.addData("", i);
+        i++;
     }
 }
