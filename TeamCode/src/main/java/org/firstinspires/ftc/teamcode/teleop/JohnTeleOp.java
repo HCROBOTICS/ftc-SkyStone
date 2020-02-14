@@ -12,6 +12,9 @@ public class JohnTeleOp extends OpMode {
 
     @Override
     public void init() {
+        telemetry.addData("Robot", "Not Ready");
+        telemetry.update();
+
         robot = new JohnRobot(hardwareMap);
         robot.init();
         robot.wheels.encoderReset();
@@ -22,6 +25,7 @@ public class JohnTeleOp extends OpMode {
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
 
+        // Set motors to BRAKE
         robot.wheels.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.wheels.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.wheels.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

@@ -10,11 +10,9 @@ public class JohnAuto extends Auto {
     public static final int TURN = 2500;
     // how far we go to align ourselves with the blocks
     public static final int INITIAL_FORWARD = 3500;
-
     // positions for the two drag servos
     public static final int DRAG_DOWN = 1;
     public static final int DRAG_UP = 0;
-
     // how long we sleep
     public static final int SLEEP_TIME = 1000;
 

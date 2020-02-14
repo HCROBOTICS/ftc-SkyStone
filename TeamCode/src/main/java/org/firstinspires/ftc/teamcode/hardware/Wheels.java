@@ -31,7 +31,7 @@ public class Wheels {
 
     public enum Direction {
         FORWARDS, RIGHT, DIAGONAL_RIGHT, DIAGONAL_LEFT,
-        CORNER_RIGHT, CORNER_LEFT, ROTATE_RIGHT, TURN_BACK, TURN_FORWARD;
+        CORNER_RIGHT, CORNER_LEFT, ROTATE_RIGHT, TURN_BACK, TURN_FORWARD
     }
 
     public Wheel wheel;
@@ -66,6 +66,8 @@ public class Wheels {
         lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // Compensate for the fact that the motors all face a different direction.
+        // JOEY, CAN WE DELETE THIS? IT IS ALREADY IN JOHN AUTO AND CAMERON AUTO AND IT POTENTIALLY
+        // CAUSED THE ISSUES WITH MY AUTONOMOUS
         lf.setDirection(DcMotor.Direction.REVERSE);
         rf.setDirection(DcMotor.Direction.FORWARD);
         lb.setDirection(DcMotor.Direction.REVERSE);
