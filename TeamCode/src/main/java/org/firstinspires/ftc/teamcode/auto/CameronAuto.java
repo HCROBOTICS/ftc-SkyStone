@@ -13,7 +13,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import static org.firstinspires.ftc.teamcode.auto.ControllerCommand.Command.*;
 
 @Autonomous (name = "Cameron Auto")
-public class CameronAuto extends LinearOpMode {
+@Disabled
+public abstract class CameronAuto extends LinearOpMode {
     protected CameronRobot robot;
     protected Vuforia vuforia;
     protected Odometer odometer;
@@ -22,7 +23,8 @@ public class CameronAuto extends LinearOpMode {
     public static final int TURN = 2700;
     public static final int PAUSE = 500;
 
-    @Override public void runOpMode() throws InterruptedException {
+
+    @Override public void runOpMode() {
         robot = new CameronRobot(hardwareMap);
         robot.init();
 
@@ -30,6 +32,8 @@ public class CameronAuto extends LinearOpMode {
         robot.wheels.rf.setDirection(DcMotor.Direction.FORWARD);
         robot.wheels.lb.setDirection(DcMotor.Direction.REVERSE);
         robot.wheels.rb.setDirection(DcMotor.Direction.FORWARD);
+
+        robot.wheels.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //vuforia = new Vuforia(hardwareMap);
         //vuforia.init();
@@ -64,14 +68,15 @@ public class CameronAuto extends LinearOpMode {
         turnRight(TURN);
         sleep(PAUSE);
 
-        // Go to the foundation.
+        // Go to the corner.
         backward(32);
         sleep(PAUSE);
 
         turnLeft(2700);
         sleep(PAUSE);
 
-        backward(28);
+        // Go to the foundation.
+        backward(30);
         sleep(PAUSE);
 
         // Grab the foundation (waiting long enough for the servos to go down).
@@ -79,7 +84,7 @@ public class CameronAuto extends LinearOpMode {
         sleep(1000);
 
         // Return to the corner.
-        forward(36);
+        forward(38);
         sleep(PAUSE);
 
         // Release the foundation.
@@ -87,7 +92,7 @@ public class CameronAuto extends LinearOpMode {
         sleep(1000);
 
         // Drive under the bridge.
-        driveToLine(Wheels.Direction.RIGHT);
+        right(32);
 
         robot.stop();
         //vuforia.stop();
@@ -112,25 +117,25 @@ public class CameronAuto extends LinearOpMode {
             if (isStopRequested()) break;
         }
 
-        robot.wheels.stop();
+        robot.stop();
     }
 
     void left(double inches) {
         robot.wheels.encoderReset();
-        robot.wheels.go(new ControllerCommand(STRAFE_LEFT));
+        robot.wheels.go(Wheels.Direction.RIGHT, -1);
 
-        while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
+        while (Math.abs(odometer.getDistanceX()) < inches) {
             if (isStopRequested()) break;
         }
 
-        robot.wheels.stop();
+        robot.stop();
     }
 
     void right(double inches) {
         robot.wheels.encoderReset();
-        robot.wheels.go(new ControllerCommand(STRAFE_RIGHT));
+        robot.wheels.go(Wheels.Direction.RIGHT, 1);
 
-        while (Math.abs(robot.wheels.encoderAverageX()) < inches) {
+        while (Math.abs(odometer.getDistanceX()) < inches) {
             if (isStopRequested()) break;
         }
 
